@@ -16,7 +16,7 @@ BuildRequires:	glut-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
-BuildRequires:	plib >= 1.2.0
+BuildRequires:	plib >= 1.6.0
 BuildRequires:	zlib-devel
 BuildRequires:	tcl-devel
 BuildRequires:	metakit-devel
