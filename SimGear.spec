@@ -12,6 +12,7 @@ License:	GPL
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.simgear.org
+Requires:	OpenGL
 BuildRequires:	OpenGL-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	libstdc++-devel
@@ -20,6 +21,8 @@ BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	plib >= 1.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define _noautoreqdep libGL.so.1 libGLU.so.1
 
 %description
 SimGear is a set of open-source libraries designed to be used as
