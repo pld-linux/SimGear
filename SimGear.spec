@@ -2,7 +2,7 @@ Summary:	a set of libraries to build 3d simulations, games etc.
 Summary(pl):	zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp.
 Name:		SimGear
 Version:	0.0.18
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
@@ -100,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc nieistniej±cy plik
+%doc COPYING 
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*
