@@ -78,6 +78,10 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 %{__make} DESTDIR="$RPM_BUILD_ROOT" install
 
+%post devel -p /sbin/ldconfig
+
+%postun devel -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so.*.*
