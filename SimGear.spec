@@ -71,8 +71,9 @@ Statyczne biblioteki SimGear.
 
 %build
 rm -f missing
-libtoolize --force --copy
-aclocal -I .
+%{__libtoolize}
+aclocal
+# -I .
 %{__autoconf}
 %{__automake}
 %configure \
