@@ -1,5 +1,5 @@
-Summary:	a set of libraries to build 3d simulations, games etc.
-Summary(pl):	zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp.
+Summary:	a set of libraries to build 3d simulations, games etc
+Summary(pl):	zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
 Version:	0.2.0
 Release:	1
