@@ -2,7 +2,7 @@ Summary:	a set of libraries to build 3d simulations, games etc.
 Summary(pl):	zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp.
 Name:		SimGear
 Version:	0.0.14
-Release:	1
+Release:	2
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
@@ -11,6 +11,7 @@ Group(pl):	Biblioteki
 License:	GPL
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-shared.patch
 URL:		http://www.simgear.org
 Requires:	OpenGL
 BuildRequires:	OpenGL-devel
@@ -19,7 +20,9 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	glut-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	libtool
 BuildRequires:	plib >= 1.2.0
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define _noautoreqdep libGL.so.1 libGLU.so.1
@@ -72,8 +75,10 @@ Statyczne biblioteki SimGear.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
+libtoolize --force --copy
 aclocal
 autoconf
 automake -a -c
