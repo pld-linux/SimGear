@@ -72,7 +72,7 @@ rm missing
 libtoolize --force --copy
 aclocal
 autoconf
-automake -a -c
+automake -a -c -f
 %configure \
 	--with-x \
 	--with-tcl=/usr/lib
