@@ -222,3 +222,16 @@ diff -urN SimGear-0.0.18.orig/simgear/xml/Makefile.am SimGear-0.0.18/simgear/xml
  
  #
  # Rule to build RPM distribution package
+
+--- hand/simgear/Makefile.am~	Thu May  9 19:51:57 2002
++++ edited/simgear/Makefile.am	Thu May  9 19:53:11 2002
+@@ -16,7 +16,8 @@
+ EXTRA_DIST = simgear_config.h.vc5 version.h.in
+ 
+ include_HEADERS = \
+-	compiler.h constants.h sg_inlines.h sg_traits.hxx sg_zlib.h version.h
++	compiler.h constants.h sg_inlines.h sg_traits.hxx sg_zlib.h \
++	version.h simgear_config.h
+ 
+ SUBDIRS = \
+ 	xml \
