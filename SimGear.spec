@@ -9,6 +9,9 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	Библиотеки
+Group(uk):	Б╕бл╕отеки
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
 URL:		http://www.simgear.org
