@@ -18,6 +18,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	glut-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	plib >= 1.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,33 +34,35 @@ SimGear to zestaw bibliotek zaprojektowanych do wykorzystania jako
 klocki do szybkiego zestawiania trójwymiarowych symulacji, gier...
 
 W tej chwili jest jeszcze trochê za wcze¶nie na u¿ywanie terminu
-"J±dro Symulacji", ale to jest kierunek w którym zmierza SimGear
+"J±dro Symulacji", ale to jest kierunek w którym zmierza SimGear.
 
 %package devel
 Summary:	header files for SimGear
+Summary(pl):	pliki nag³ówkowe dla SimGear
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 
 %description devel
-Header files neccessary to build SimGear applications
+Header files neccessary to build SimGear applications.
 
 %description devel -l pl
-Pliki nag³ówkowe potrzebne do budowania aplikacji z SimGearem
+Pliki nag³ówkowe potrzebne do budowania aplikacji z SimGearem.
 
 %package static
 Summary:	static SimGear libraries
+Summary(pl):	statyczne biblioteki SimGear
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 
 %description static
-Static SimGear libraries
+Static SimGear libraries.
 
 %description static -l pl
-Statyczne biblioteki SimGear
+Statyczne biblioteki SimGear.
 
 %prep
 %setup -q
@@ -91,6 +94,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%doc simgear/metakit/doc/*.html
+%doc simgear/metakit/doc/api
 %attr(755,root,root) %{_libdir}/*.so
 %attr(755,root,root) %{_libdir}/*.la
 %{_includedir}/*
