@@ -1,4 +1,5 @@
 Summary:	a set of libraries to build 3d simulations, games etc.
+Summary(pl):	zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp.
 Name:		SimGear
 Version:	0.0.14
 Release:	1
@@ -10,11 +11,13 @@ Group(pl):	Biblioteki
 License:	GPL
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
+URL:		http://www.simgear.org
 BuildRequires:	OpenGL-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	glut-devel
-BuildRequires:	gcc-c++
+BuildRequires:	automake
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -62,9 +65,6 @@ Statyczne biblioteki SimGear
 %setup -q
 %patch0 -p1
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %build
 aclocal
 autoconf
@@ -81,6 +81,9 @@ install -d $RPM_BUILD_ROOT
 %post devel -p /sbin/ldconfig
 
 %postun devel -p /sbin/ldconfig
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
