@@ -1,5 +1,5 @@
-Summary:	a set of libraries to build 3d simulations, games etc
-Summary(pl):	zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
+Summary:	A set of libraries to build 3d simulations, games etc
+Summary(pl):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
 Version:	0.3.3
 Release:	1
@@ -41,8 +41,8 @@ W tej chwili jest jeszcze trochê za wcze¶nie na u¿ywanie terminu
 "J±dro Symulacji", ale to jest kierunek w którym zmierza SimGear.
 
 %package devel
-Summary:	header files for SimGear
-Summary(pl):	pliki nag³ówkowe dla SimGear
+Summary:	Header files for SimGear
+Summary(pl):	Pliki nag³ówkowe dla SimGear
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
 
@@ -53,8 +53,8 @@ Header files neccessary to build SimGear applications.
 Pliki nag³ówkowe potrzebne do budowania aplikacji z SimGearem.
 
 %package static
-Summary:	static SimGear libraries
-Summary(pl):	statyczne biblioteki SimGear
+Summary:	Static SimGear libraries
+Summary(pl):	Statyczne biblioteki SimGear
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 
