@@ -1,18 +1,19 @@
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
-Version:	0.3.5
+Version:	0.3.6
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
-# Source0-md5:	24e87739c63c125a7c2c55836a27b121
+# Source0-md5:	8ea139152a3eba476f5d7178f571b72a
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-libs.patch
 URL:		http://www.simgear.org/
+Buildrequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	glut-devel
 BuildRequires:	libstdc++-devel
@@ -25,7 +26,7 @@ Requires:	OpenGL
 Requires:	plib >= 1.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define _noautoreqdep libGL.so.1 libGLU.so.1
+%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 SimGear is a set of open-source libraries designed to be used as
@@ -47,6 +48,7 @@ Summary:	Header files for SimGear
 Summary(pl):	Pliki nag³ówkowe dla SimGear
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	OpenAL-devel
 Requires:	OpenGL-devel-base
 Requires:	plib-devel >= 1.8.0
 
