@@ -1,6 +1,6 @@
-diff -Naur SimGear-0.2.0/configure.ac SimGear-0.2.0-p/configure.ac
---- SimGear-0.2.0/configure.ac	Sat Sep  7 03:25:02 2002
-+++ SimGear-0.2.0-p/configure.ac	Fri Sep 13 08:12:18 2002
+diff -urN aaa/SimGear-0.3.3/configure.ac SimGear-0.3.3/configure.ac
+--- aaa/SimGear-0.3.3/configure.ac	2003-06-03 20:48:49.000000000 +0200
++++ SimGear-0.3.3/configure.ac	2003-08-02 13:50:56.000000000 +0200
 @@ -34,7 +34,7 @@
  AC_PROG_CC
  AC_PROG_CPP
@@ -10,27 +10,9 @@ diff -Naur SimGear-0.2.0/configure.ac SimGear-0.2.0-p/configure.ac
  AC_PROG_INSTALL
  AC_PROG_LN_S
  
-diff -Naur SimGear-0.2.0/simgear/Makefile.am SimGear-0.2.0-p/simgear/Makefile.am
---- SimGear-0.2.0/simgear/Makefile.am	Mon Sep  2 05:42:51 2002
-+++ SimGear-0.2.0-p/simgear/Makefile.am	Fri Sep 13 08:21:08 2002
-@@ -18,13 +18,13 @@
- 	misc \
- 	bucket \
- 	ephemeris \
-+	serial \
- 	io \
- 	magvar \
- 	math \
- 	$(METAR_DIRS) \
- 	route \
- 	screen \
--	serial \
- 	sky \
- 	$(SGTHREAD_DIR) \
- 	timing \
-diff -Naur SimGear-0.2.0/simgear/bucket/Makefile.am SimGear-0.2.0-p/simgear/bucket/Makefile.am
---- SimGear-0.2.0/simgear/bucket/Makefile.am	Sun Aug 25 19:24:15 2002
-+++ SimGear-0.2.0-p/simgear/bucket/Makefile.am	Fri Sep 13 08:13:01 2002
+diff -urN aaa/SimGear-0.3.3/simgear/bucket/Makefile.am SimGear-0.3.3/simgear/bucket/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/bucket/Makefile.am	2003-05-20 20:30:09.000000000 +0200
++++ SimGear-0.3.3/simgear/bucket/Makefile.am	2003-08-02 13:44:28.000000000 +0200
 @@ -1,10 +1,10 @@
  includedir = @includedir@/bucket
  
@@ -44,9 +26,9 @@ diff -Naur SimGear-0.2.0/simgear/bucket/Makefile.am SimGear-0.2.0-p/simgear/buck
  
  # noinst_PROGRAMS = testbucket
  
-diff -Naur SimGear-0.2.0/simgear/debug/Makefile.am SimGear-0.2.0-p/simgear/debug/Makefile.am
---- SimGear-0.2.0/simgear/debug/Makefile.am	Sun Aug 25 19:24:20 2002
-+++ SimGear-0.2.0-p/simgear/debug/Makefile.am	Fri Sep 13 08:13:24 2002
+diff -urN aaa/SimGear-0.3.3/simgear/debug/Makefile.am SimGear-0.3.3/simgear/debug/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/debug/Makefile.am	2003-05-20 20:30:10.000000000 +0200
++++ SimGear-0.3.3/simgear/debug/Makefile.am	2003-08-02 13:43:13.000000000 +0200
 @@ -2,10 +2,10 @@
  
  EXTRA_DIST = logtest.cxx
@@ -60,9 +42,9 @@ diff -Naur SimGear-0.2.0/simgear/debug/Makefile.am SimGear-0.2.0-p/simgear/debug
 +libsgdebug_la_SOURCES = logstream.cxx
  
  INCLUDES = -I$(top_srcdir)
-diff -Naur SimGear-0.2.0/simgear/ephemeris/Makefile.am SimGear-0.2.0-p/simgear/ephemeris/Makefile.am
---- SimGear-0.2.0/simgear/ephemeris/Makefile.am	Sun Aug 25 19:24:27 2002
-+++ SimGear-0.2.0-p/simgear/ephemeris/Makefile.am	Fri Sep 13 08:13:39 2002
+diff -urN aaa/SimGear-0.3.3/simgear/ephemeris/Makefile.am SimGear-0.3.3/simgear/ephemeris/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/ephemeris/Makefile.am	2003-05-20 20:30:10.000000000 +0200
++++ SimGear-0.3.3/simgear/ephemeris/Makefile.am	2003-08-02 13:44:42.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/ephemeris
  
@@ -80,9 +62,9 @@ diff -Naur SimGear-0.2.0/simgear/ephemeris/Makefile.am SimGear-0.2.0-p/simgear/e
  	celestialBody.cxx \
  	ephemeris.cxx \
  	jupiter.cxx \
-diff -Naur SimGear-0.2.0/simgear/io/Makefile.am SimGear-0.2.0-p/simgear/io/Makefile.am
---- SimGear-0.2.0/simgear/io/Makefile.am	Sat Sep  7 01:13:31 2002
-+++ SimGear-0.2.0-p/simgear/io/Makefile.am	Fri Sep 13 08:15:47 2002
+diff -urN aaa/SimGear-0.3.3/simgear/io/Makefile.am SimGear-0.3.3/simgear/io/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/io/Makefile.am	2003-05-20 20:30:11.000000000 +0200
++++ SimGear-0.3.3/simgear/io/Makefile.am	2003-08-02 15:02:48.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/io
  
@@ -100,7 +82,39 @@ diff -Naur SimGear-0.2.0/simgear/io/Makefile.am SimGear-0.2.0-p/simgear/io/Makef
  	iochannel.cxx \
  	lowlevel.cxx \
  	sg_binobj.cxx \
-@@ -53,24 +53,32 @@
+@@ -27,44 +27,54 @@
+ tcp_server_SOURCES = tcp_server.cxx
+ 
+ tcp_server_LDADD = \
+-	$(top_builddir)/simgear/io/libsgio.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/bucket/libsgbucket.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
+-	$(top_builddir)/simgear/xml/libsgxml.a \
++	$(top_builddir)/simgear/io/libsgio.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/bucket/libsgbucket.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
++	$(top_builddir)/simgear/xml/libsgxml.la \
++	$(top_builddir)/simgear/serial/libsgserial.la \
+ 	-lplibnet -lplibul -lz
+ 
+ tcp_client_SOURCES = tcp_client.cxx
+ 
+ tcp_client_LDADD = \
+-	$(top_builddir)/simgear/io/libsgio.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/bucket/libsgbucket.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
+-        $(top_builddir)/simgear/xml/libsgxml.a \
++	$(top_builddir)/simgear/io/libsgio.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/bucket/libsgbucket.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
++        $(top_builddir)/simgear/xml/libsgxml.la \
++	$(top_builddir)/simgear/serial/libsgserial.la \
+ 	-lplibnet -lplibul -lz
+ 
  socktest_SOURCES = socktest.cxx
  
  socktest_LDADD = \
@@ -115,7 +129,7 @@ diff -Naur SimGear-0.2.0/simgear/io/Makefile.am SimGear-0.2.0-p/simgear/io/Makef
 +	$(top_builddir)/simgear/misc/libsgmisc.la \
 +	$(top_builddir)/simgear/xml/libsgxml.la \
 +	$(top_builddir)/simgear/serial/libsgserial.la \
- 	-lplibnet -lplibul -lz $(NETWORK_LIB)
+ 	-lplibnet -lplibul -lz
  
  lowtest_SOURCES = lowtest.cxx
  
@@ -127,7 +141,7 @@ diff -Naur SimGear-0.2.0/simgear/io/Makefile.am SimGear-0.2.0-p/simgear/io/Makef
 +	$(top_builddir)/simgear/debug/libsgdebug.la \
 +	$(top_builddir)/simgear/misc/libsgmisc.la \
 +	$(top_builddir)/simgear/xml/libsgxml.la \
-+	-lplibnet -lplibul -lz $(NETWORK_LIB)
++	-lplibnet -lplibul -lz
  
  decode_binobj_SOURCES = decode_binobj.cxx
  
@@ -144,10 +158,10 @@ diff -Naur SimGear-0.2.0/simgear/io/Makefile.am SimGear-0.2.0-p/simgear/io/Makef
 +        $(top_builddir)/simgear/debug/libsgdebug.la \
 +	$(top_builddir)/simgear/xml/libsgxml.la \
 +	$(top_builddir)/simgear/serial/libsgserial.la \
-+	$(NETWORK_LIB) -lz -lplibnet
-diff -Naur SimGear-0.2.0/simgear/magvar/Makefile.am SimGear-0.2.0-p/simgear/magvar/Makefile.am
---- SimGear-0.2.0/simgear/magvar/Makefile.am	Sun Aug 25 19:24:53 2002
-+++ SimGear-0.2.0-p/simgear/magvar/Makefile.am	Fri Sep 13 08:16:10 2002
++	-lz -lplibnet
+diff -urN aaa/SimGear-0.3.3/simgear/magvar/Makefile.am SimGear-0.3.3/simgear/magvar/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/magvar/Makefile.am	2003-05-20 20:30:12.000000000 +0200
++++ SimGear-0.3.3/simgear/magvar/Makefile.am	2003-08-02 13:45:56.000000000 +0200
 @@ -1,10 +1,10 @@
  includedir = @includedir@/magvar
  
@@ -169,9 +183,28 @@ diff -Naur SimGear-0.2.0/simgear/magvar/Makefile.am SimGear-0.2.0-p/simgear/magv
 +testmagvar_LDADD = $(top_builddir)/simgear/magvar/libsgmagvar.la
  
  INCLUDES = -I$(top_srcdir)
-diff -Naur SimGear-0.2.0/simgear/math/Makefile.am SimGear-0.2.0-p/simgear/math/Makefile.am
---- SimGear-0.2.0/simgear/math/Makefile.am	Sun Aug 25 19:25:01 2002
-+++ SimGear-0.2.0-p/simgear/math/Makefile.am	Fri Sep 13 08:16:39 2002
+diff -urN aaa/SimGear-0.3.3/simgear/Makefile.am SimGear-0.3.3/simgear/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/Makefile.am	2003-05-30 17:16:25.000000000 +0200
++++ SimGear-0.3.3/simgear/Makefile.am	2003-08-02 13:42:11.000000000 +0200
+@@ -19,6 +19,7 @@
+ 	misc \
+ 	bucket \
+ 	ephemeris \
++	serial \
+ 	io \
+ 	magvar \
+ 	math \
+@@ -27,7 +28,6 @@
+ 	route \
+ 	scene \
+ 	screen \
+-	serial \
+ 	sound \
+ 	$(SGTHREAD_DIR) \
+ 	timing \
+diff -urN aaa/SimGear-0.3.3/simgear/math/Makefile.am SimGear-0.3.3/simgear/math/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/math/Makefile.am	2003-05-20 20:30:12.000000000 +0200
++++ SimGear-0.3.3/simgear/math/Makefile.am	2003-08-02 13:46:09.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/math
  
@@ -189,9 +222,9 @@ diff -Naur SimGear-0.2.0/simgear/math/Makefile.am SimGear-0.2.0-p/simgear/math/M
  	interpolater.cxx \
  	leastsqs.cxx \
  	polar3d.cxx \
-diff -Naur SimGear-0.2.0/simgear/metar/Makefile.am SimGear-0.2.0-p/simgear/metar/Makefile.am
---- SimGear-0.2.0/simgear/metar/Makefile.am	Sun Aug 25 19:25:07 2002
-+++ SimGear-0.2.0-p/simgear/metar/Makefile.am	Fri Sep 13 08:16:56 2002
+diff -urN aaa/SimGear-0.3.3/simgear/metar/Makefile.am SimGear-0.3.3/simgear/metar/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/metar/Makefile.am	2003-05-20 20:30:14.000000000 +0200
++++ SimGear-0.3.3/simgear/metar/Makefile.am	2003-08-02 13:46:21.000000000 +0200
 @@ -1,10 +1,10 @@
  includedir = @includedir@/metar
  
@@ -205,9 +238,9 @@ diff -Naur SimGear-0.2.0/simgear/metar/Makefile.am SimGear-0.2.0-p/simgear/metar
  	Antoi.cpp Charcmp.cpp Dcdmetar.cpp Dcdmtrmk.cpp Drvmetar.c \
  	Fracpart.cpp Local.h Metar.h \
  	MetarReport.cpp \
-diff -Naur SimGear-0.2.0/simgear/misc/Makefile.am SimGear-0.2.0-p/simgear/misc/Makefile.am
---- SimGear-0.2.0/simgear/misc/Makefile.am	Sun Aug 25 19:25:13 2002
-+++ SimGear-0.2.0-p/simgear/misc/Makefile.am	Fri Sep 13 08:17:36 2002
+diff -urN aaa/SimGear-0.3.3/simgear/misc/Makefile.am SimGear-0.3.3/simgear/misc/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/misc/Makefile.am	2003-05-20 20:30:15.000000000 +0200
++++ SimGear-0.3.3/simgear/misc/Makefile.am	2003-08-02 13:53:31.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/misc
  
@@ -216,7 +249,7 @@ diff -Naur SimGear-0.2.0/simgear/misc/Makefile.am SimGear-0.2.0-p/simgear/misc/M
  
  include_HEADERS = \
          commands.hxx \
-@@ -14,7 +14,7 @@
+@@ -13,7 +13,7 @@
  	texcoord.hxx \
  	zfstream.hxx
  
@@ -224,18 +257,57 @@ diff -Naur SimGear-0.2.0/simgear/misc/Makefile.am SimGear-0.2.0-p/simgear/misc/M
 +libsgmisc_la_SOURCES = \
          commands.cxx \
          exception.cxx \
- 	props.cxx \
-@@ -28,6 +28,6 @@
- noinst_PROGRAMS = props_test
+ 	sg_path.cxx \
+@@ -27,8 +27,9 @@
  
- props_test_SOURCES = props_test.cxx
--props_test_LDADD = libsgmisc.a ../xml/libsgxml.a ../debug/libsgdebug.a
-+props_test_LDADD = libsgmisc.la ../xml/libsgxml.la ../debug/libsgdebug.la -lz
+ tabbed_value_test_SOURCES = tabbed_values_test.cxx
+ tabbed_value_test_LDADD = \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
+-	$(top_builddir)/simgear/xml/libsgxml.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a
++	$(top_builddir)/simgear/misc/libsgmisc.la \
++	$(top_builddir)/simgear/xml/libsgxml.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	-lz
  
  INCLUDES = -I$(top_srcdir)
-diff -Naur SimGear-0.2.0/simgear/route/Makefile.am SimGear-0.2.0-p/simgear/route/Makefile.am
---- SimGear-0.2.0/simgear/route/Makefile.am	Sun Aug 25 19:25:18 2002
-+++ SimGear-0.2.0-p/simgear/route/Makefile.am	Fri Sep 13 08:18:32 2002
+diff -urN aaa/SimGear-0.3.3/simgear/props/Makefile.am SimGear-0.3.3/simgear/props/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/props/Makefile.am	2003-05-20 20:30:24.000000000 +0200
++++ SimGear-0.3.3/simgear/props/Makefile.am	2003-08-02 15:11:08.000000000 +0200
+@@ -1,13 +1,13 @@
+ includedir = @includedir@/props
+ 
+-lib_LIBRARIES = libsgprops.a
++lib_LTLIBRARIES = libsgprops.la
+ 
+ include_HEADERS = \
+ 	condition.hxx \
+ 	props.hxx \
+ 	props_io.hxx
+ 
+-libsgprops_a_SOURCES = \
++libsgprops_la_SOURCES = \
+ 	condition.cxx \
+ 	props.cxx \
+         props_io.cxx
+@@ -16,9 +16,10 @@
+ 
+ props_test_SOURCES = props_test.cxx
+ props_test_LDADD = \
+-	$(top_builddir)/simgear/props/libsgprops.a \
+-	$(top_builddir)/simgear/xml/libsgxml.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a
++	$(top_builddir)/simgear/props/libsgprops.la \
++	$(top_builddir)/simgear/xml/libsgxml.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	-lz
+ 
+ INCLUDES = -I$(top_srcdir)
+diff -urN aaa/SimGear-0.3.3/simgear/route/Makefile.am SimGear-0.3.3/simgear/route/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/route/Makefile.am	2003-05-20 20:30:16.000000000 +0200
++++ SimGear-0.3.3/simgear/route/Makefile.am	2003-08-02 15:18:24.000000000 +0200
 @@ -1,10 +1,10 @@
  includedir = @includedir@/route
  
@@ -249,7 +321,7 @@ diff -Naur SimGear-0.2.0/simgear/route/Makefile.am SimGear-0.2.0-p/simgear/route
  	route.cxx \
  	waypoint.cxx
  
-@@ -15,16 +15,19 @@
+@@ -15,16 +15,20 @@
  waytest_SOURCES = waytest.cxx
  
  waytest_LDADD = \
@@ -277,29 +349,111 @@ diff -Naur SimGear-0.2.0/simgear/route/Makefile.am SimGear-0.2.0-p/simgear/route
 +	$(top_builddir)/simgear/misc/libsgmisc.la \
 +	$(top_builddir)/simgear/xml/libsgxml.la \
 +	-lz
-diff -Naur SimGear-0.2.0/simgear/screen/Makefile.am SimGear-0.2.0-p/simgear/screen/Makefile.am
---- SimGear-0.2.0/simgear/screen/Makefile.am	Sun Aug 25 19:25:25 2002
-+++ SimGear-0.2.0-p/simgear/screen/Makefile.am	Fri Sep 13 08:18:51 2002
++	
+diff -urN aaa/SimGear-0.3.3/simgear/scene/material/Makefile.am SimGear-0.3.3/simgear/scene/material/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/scene/material/Makefile.am	2003-05-20 20:30:26.000000000 +0200
++++ SimGear-0.3.3/simgear/scene/material/Makefile.am	2003-08-02 13:47:17.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/material
+ 
+-lib_LIBRARIES = libsgmaterial.a
++lib_LTLIBRARIES = libsgmaterial.la
+ 
+ noinst_HEADERS =
+ 
+@@ -9,7 +9,7 @@
+ 	matlib.hxx \
+ 	matmodel.hxx
+ 
+-libsgmaterial_a_SOURCES = \
++libsgmaterial_la_SOURCES = \
+ 	mat.cxx \
+ 	matlib.cxx \
+ 	matmodel.cxx
+diff -urN aaa/SimGear-0.3.3/simgear/scene/model/Makefile.am SimGear-0.3.3/simgear/scene/model/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/scene/model/Makefile.am	2003-05-20 20:30:25.000000000 +0200
++++ SimGear-0.3.3/simgear/scene/model/Makefile.am	2003-08-02 13:47:28.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/model
+ 
+-lib_LIBRARIES = libsgmodel.a
++lib_LTLIBRARIES = libsgmodel.la
+ 
+ noinst_HEADERS =
+ 
+@@ -11,7 +11,7 @@
+ 	modellib.hxx \
+ 	placement.hxx
+ 
+-libsgmodel_a_SOURCES = \
++libsgmodel_la_SOURCES = \
+ 	animation.cxx \
+ 	location.cxx \
+ 	model.cxx \
+diff -urN aaa/SimGear-0.3.3/simgear/scene/sky/Makefile.am SimGear-0.3.3/simgear/scene/sky/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/scene/sky/Makefile.am	2003-05-30 17:16:26.000000000 +0200
++++ SimGear-0.3.3/simgear/scene/sky/Makefile.am	2003-08-02 13:47:41.000000000 +0200
+@@ -2,7 +2,7 @@
+ 
+ # SUBDIRS = clouds3d
+ 
+-lib_LIBRARIES = libsgsky.a
++lib_LTLIBRARIES = libsgsky.la
+ 
+ include_HEADERS = \
+ 	cloud.hxx \
+@@ -13,7 +13,7 @@
+ 	sphere.hxx \
+ 	stars.hxx
+ 
+-libsgsky_a_SOURCES = \
++libsgsky_la_SOURCES = \
+ 	cloud.cxx \
+ 	dome.cxx \
+ 	moon.cxx \
+diff -urN aaa/SimGear-0.3.3/simgear/scene/tgdb/Makefile.am SimGear-0.3.3/simgear/scene/tgdb/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/scene/tgdb/Makefile.am	2003-05-30 21:33:02.000000000 +0200
++++ SimGear-0.3.3/simgear/scene/tgdb/Makefile.am	2003-08-02 13:47:54.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/tgdb
+ 
+-lib_LIBRARIES = libsgtgdb.a
++lib_LTLIBRARIES = libsgtgdb.la
+ 
+ noinst_HEADERS =
+ 
+@@ -11,7 +11,7 @@
+ 	pt_lights.hxx \
+ 	userdata.hxx
+ 
+-libsgtgdb_a_SOURCES = \
++libsgtgdb_la_SOURCES = \
+ 	apt_signs.cxx \
+ 	leaf.cxx \
+ 	obj.cxx \
+diff -urN aaa/SimGear-0.3.3/simgear/screen/Makefile.am SimGear-0.3.3/simgear/screen/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/screen/Makefile.am	2003-05-20 20:30:17.000000000 +0200
++++ SimGear-0.3.3/simgear/screen/Makefile.am	2003-08-02 13:48:09.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/screen
  
 -lib_LIBRARIES = libsgscreen.a
 +lib_LTLIBRARIES = libsgscreen.la
  
- if ENABLE_JPEG_SERVER
- IMAGE_SERVER_INCL = jpgfactory.hxx
-@@ -12,7 +12,7 @@
+ EXTRA_DIST = jpgfactory.cxx jpgfactory.hxx
  
- include_HEADERS = $(IMAGE_SERVER_INCL) screen-dump.hxx tr.h
+@@ -21,7 +21,7 @@
+ 	screen-dump.hxx \
+ 	tr.h
  
 -libsgscreen_a_SOURCES = \
 +libsgscreen_la_SOURCES = \
+ 	texture.cxx \
  	GLBitmaps.cxx GLBitmaps.h \
  	$(IMAGE_SERVER_SRCS) \
- 	screen-dump.cxx \
-diff -Naur SimGear-0.2.0/simgear/serial/Makefile.am SimGear-0.2.0-p/simgear/serial/Makefile.am
---- SimGear-0.2.0/simgear/serial/Makefile.am	Sat Sep  7 02:40:38 2002
-+++ SimGear-0.2.0-p/simgear/serial/Makefile.am	Fri Sep 13 08:19:16 2002
+diff -urN aaa/SimGear-0.3.3/simgear/serial/Makefile.am SimGear-0.3.3/simgear/serial/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/serial/Makefile.am	2003-05-20 20:30:17.000000000 +0200
++++ SimGear-0.3.3/simgear/serial/Makefile.am	2003-08-02 13:48:22.000000000 +0200
 @@ -1,17 +1,17 @@
  includedir = @includedir@/serial
  
@@ -322,29 +476,26 @@ diff -Naur SimGear-0.2.0/simgear/serial/Makefile.am SimGear-0.2.0-p/simgear/seri
 +	$(top_builddir)/simgear/debug/libsgdebug.la
  
  INCLUDES = -I$(top_srcdir)
-diff -Naur SimGear-0.2.0/simgear/sky/Makefile.am SimGear-0.2.0-p/simgear/sky/Makefile.am
---- SimGear-0.2.0/simgear/sky/Makefile.am	Sun Aug 25 19:25:35 2002
-+++ SimGear-0.2.0-p/simgear/sky/Makefile.am	Fri Sep 13 08:19:31 2002
-@@ -1,6 +1,6 @@
- includedir = @includedir@/sky
+diff -urN aaa/SimGear-0.3.3/simgear/sound/Makefile.am SimGear-0.3.3/simgear/sound/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/sound/Makefile.am	2003-05-20 20:30:25.000000000 +0200
++++ SimGear-0.3.3/simgear/sound/Makefile.am	2003-08-02 13:48:32.000000000 +0200
+@@ -1,11 +1,11 @@
+ includedir = @includedir@/sound
  
--lib_LIBRARIES = libsgsky.a
-+lib_LTLIBRARIES = libsgsky.la
+-lib_LIBRARIES = libsgsound.a
++lib_LTLIBRARIES = libsgsound.la
  
- include_HEADERS = \
- 	cloud.hxx \
-@@ -11,7 +11,7 @@
- 	sphere.hxx \
- 	stars.hxx
+ noinst_HEADERS =
  
--libsgsky_a_SOURCES = \
-+libsgsky_la_SOURCES = \
- 	cloud.cxx \
- 	dome.cxx \
- 	moon.cxx \
-diff -Naur SimGear-0.2.0/simgear/threads/Makefile.am SimGear-0.2.0-p/simgear/threads/Makefile.am
---- SimGear-0.2.0/simgear/threads/Makefile.am	Sun Aug 25 19:25:39 2002
-+++ SimGear-0.2.0-p/simgear/threads/Makefile.am	Fri Sep 13 08:20:32 2002
+ include_HEADERS = sound.hxx soundmgr.hxx
+ 
+-libsgsound_a_SOURCES = sound.cxx soundmgr.cxx
++libsgsound_la_SOURCES = sound.cxx soundmgr.cxx
+ 
+ INCLUDES = -I$(top_srcdir)
+diff -urN aaa/SimGear-0.3.3/simgear/threads/Makefile.am SimGear-0.3.3/simgear/threads/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/threads/Makefile.am	2003-05-20 20:30:21.000000000 +0200
++++ SimGear-0.3.3/simgear/threads/Makefile.am	2003-08-02 13:48:41.000000000 +0200
 @@ -1,13 +1,13 @@
  includedir = @includedir@/threads
  
@@ -361,9 +512,9 @@ diff -Naur SimGear-0.2.0/simgear/threads/Makefile.am SimGear-0.2.0-p/simgear/thr
  	SGThread.cxx
  
  INCLUDES = -I$(top_srcdir)
-diff -Naur SimGear-0.2.0/simgear/timing/Makefile.am SimGear-0.2.0-p/simgear/timing/Makefile.am
---- SimGear-0.2.0/simgear/timing/Makefile.am	Sun Aug 25 19:25:43 2002
-+++ SimGear-0.2.0-p/simgear/timing/Makefile.am	Fri Sep 13 08:19:41 2002
+diff -urN aaa/SimGear-0.3.3/simgear/timing/Makefile.am SimGear-0.3.3/simgear/timing/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/timing/Makefile.am	2003-05-20 20:30:21.000000000 +0200
++++ SimGear-0.3.3/simgear/timing/Makefile.am	2003-08-02 13:48:50.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/timing
  
@@ -381,9 +532,9 @@ diff -Naur SimGear-0.2.0/simgear/timing/Makefile.am SimGear-0.2.0-p/simgear/timi
  	geocoord.cxx \
  	lowleveltime.cxx \
  	sg_time.cxx \
-diff -Naur SimGear-0.2.0/simgear/xgl/Makefile.am SimGear-0.2.0-p/simgear/xgl/Makefile.am
---- SimGear-0.2.0/simgear/xgl/Makefile.am	Sun Aug 25 19:25:47 2002
-+++ SimGear-0.2.0-p/simgear/xgl/Makefile.am	Fri Sep 13 08:20:05 2002
+diff -urN aaa/SimGear-0.3.3/simgear/xgl/Makefile.am SimGear-0.3.3/simgear/xgl/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/xgl/Makefile.am	2003-05-20 20:30:22.000000000 +0200
++++ SimGear-0.3.3/simgear/xgl/Makefile.am	2003-08-02 13:48:58.000000000 +0200
 @@ -1,9 +1,9 @@
  includedir = @includedir@/xgl
  
@@ -396,9 +547,9 @@ diff -Naur SimGear-0.2.0/simgear/xgl/Makefile.am SimGear-0.2.0-p/simgear/xgl/Mak
 +libsgxgl_la_SOURCES = xgl.c xglUtils.c
  
  INCLUDES = -I$(top_srcdir)
-diff -Naur SimGear-0.2.0/simgear/xml/Makefile.am SimGear-0.2.0-p/simgear/xml/Makefile.am
---- SimGear-0.2.0/simgear/xml/Makefile.am	Sun Aug 25 19:25:52 2002
-+++ SimGear-0.2.0-p/simgear/xml/Makefile.am	Fri Sep 13 08:20:15 2002
+diff -urN aaa/SimGear-0.3.3/simgear/xml/Makefile.am SimGear-0.3.3/simgear/xml/Makefile.am
+--- aaa/SimGear-0.3.3/simgear/xml/Makefile.am	2003-05-20 20:30:22.000000000 +0200
++++ SimGear-0.3.3/simgear/xml/Makefile.am	2003-08-02 13:42:56.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/xml
  
@@ -416,59 +567,3 @@ diff -Naur SimGear-0.2.0/simgear/xml/Makefile.am SimGear-0.2.0-p/simgear/xml/Mak
          asciitab.h \
  	easyxml.cxx \
  	hashtable.h hashtable.c \
-diff -Naur SimGear-0.2.0/simgear/io/Makefile.am SimGear-0.2.0-p/simgear/io/Makefile.am
---- SimGear-0.2.0/simgear/io/Makefile.am	Fri Sep 13 20:44:42 2002
-+++ SimGear-0.2.0-p/simgear/io/Makefile.am	Fri Sep 13 20:45:21 2002
-@@ -33,21 +33,23 @@
- tcp_server_SOURCES = tcp_server.cxx
- 
- tcp_server_LDADD = \
--	$(top_builddir)/simgear/io/libsgio.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/bucket/libsgbucket.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
--	$(top_builddir)/simgear/xml/libsgxml.a \
-+	$(top_builddir)/simgear/io/libsgio.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/bucket/libsgbucket.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
-+	$(top_builddir)/simgear/serial/libsgserial.la \
- 	-lplibnet -lplibul -lz $(NETWORK_LIB)
- 
- tcp_client_SOURCES = tcp_client.cxx
- 
- tcp_client_LDADD = \
--	$(top_builddir)/simgear/io/libsgio.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/bucket/libsgbucket.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
--        $(top_builddir)/simgear/xml/libsgxml.a \
-+	$(top_builddir)/simgear/io/libsgio.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/bucket/libsgbucket.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+        $(top_builddir)/simgear/xml/libsgxml.la \
-+        $(top_builddir)/simgear/serial/libsgserial.la \
- 	-lplibnet -lplibul -lz $(NETWORK_LIB)
- 
- socktest_SOURCES = socktest.cxx
-diff -Naur SimGear-0.3.1/simgear/sky/clouds3d/Makefile.am SimGear-0.3.1-p/simgear/sky/clouds3d/Makefile.am
---- SimGear-0.3.1/simgear/sky/clouds3d/Makefile.am	Wed Dec  4 20:34:36 2002
-+++ SimGear-0.3.1-p/simgear/sky/clouds3d/Makefile.am	Sun May  4 18:44:37 2003
-@@ -9,13 +9,13 @@
-   EXTGL_SOURCE = 
- endif
- 
--lib_LIBRARIES = libsgclouds3d.a
-+lib_LTLIBRARIES = libsgclouds3d.la
- 
- include_HEADERS = \
- 	SkySceneLoader.hpp \
- 	SkyUtil.hpp
- 
--libsgclouds3d_a_SOURCES = \
-+libsgclouds3d_la_SOURCES = \
-         $(EXTGL_SOURCE) \
- 	vec3fv.cpp vec3fv.hpp vec3f.hpp vec4f.hpp vec2f.hpp \
- 	mat16fv.cpp mat16fv.hpp \
