@@ -43,6 +43,7 @@ Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
 
 %description devel
 Header files neccessary to build SimGear applications.
@@ -57,6 +58,7 @@ Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-devel = %{version}
 
 %description static
 Static SimGear libraries.
