@@ -9,18 +9,18 @@ Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 # Source0-md5:	1711909a9175a193ae2c3c7093d2745c
 Patch0:		%{name}-shared.patch
 URL:		http://www.simgear.org/
-Requires:	OpenGL
 BuildRequires:	OpenGL-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	libstdc++-devel
-BuildRequires:	glut-devel
-BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	glut-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	plib >= 1.7.0
-BuildRequires:	zlib-devel
-BuildRequires:	tcl-devel
 BuildRequires:	metakit-devel
+BuildRequires:	plib >= 1.7.0
+BuildRequires:	tcl-devel
+BuildRequires:	zlib-devel
+Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define _noautoreqdep libGL.so.1 libGLU.so.1
@@ -82,7 +82,8 @@ rm -f missing
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
