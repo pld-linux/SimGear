@@ -12,6 +12,7 @@ License:	GPL
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-shared.patch
+Patch2:		%{name}-metakit.patch
 URL:		http://www.simgear.org
 Requires:	OpenGL
 BuildRequires:	OpenGL-devel
@@ -23,6 +24,7 @@ BuildRequires:	autoconf
 BuildRequires:	libtool
 BuildRequires:	plib >= 1.2.0
 BuildRequires:	zlib-devel
+BuildRequires:	tcl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define _noautoreqdep libGL.so.1 libGLU.so.1
@@ -76,6 +78,7 @@ Statyczne biblioteki SimGear.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 libtoolize --force --copy
@@ -83,7 +86,8 @@ aclocal
 autoconf
 automake -a -c
 %configure \
-	--with-x
+	--with-x \
+	--with-tcl=/usr/lib
 %{__make}
 
 %install
