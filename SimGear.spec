@@ -10,7 +10,7 @@ Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-libs.patch
 URL:		http://www.simgear.org/
-Buildrequires:	OpenAL-devel
+BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.52
@@ -76,7 +76,6 @@ Statyczne biblioteki SimGear.
 %patch1 -p1
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -92,23 +91,23 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS
-%attr(755,root,root) %{_libdir}/*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc TODO
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%{_includedir}/*
+%{_includedir}/simgear
 
 %files static
 %defattr(644,root,root,755)
