@@ -1,0 +1,20 @@
+diff -Naur SimGear-0.0.14/configure.in SimGear-0.0.14-p/configure.in
+--- SimGear-0.0.14/configure.in	Sun Apr 22 00:43:39 2001
++++ SimGear-0.0.14-p/configure.in	Sun Apr 22 00:44:33 2001
+@@ -222,12 +222,12 @@
+ # AM_CONDITIONAL(HAVE_GDBM, test "x$ac_cv_header_gdbm_h" = "xyes" )
+ 
+ dnl Check for system installed metakit
+-AC_CHECK_HEADER(mk4.h)
+-if test "x$ac_cv_header_mk4_h" != "xyes"; then
+-    echo "no metakit found, configuring and building."
++#AC_CHECK_HEADER(mk4.h)
++#if test "x$ac_cv_header_mk4_h" != "xyes"; then
++#    echo "no metakit found, configuring and building."
+     # Run configure in the metakit subdir
+     AC_CONFIG_SUBDIRS( simgear/metakit/unix )
+-fi
++#fi
+ AM_CONDITIONAL(HAVE_METAKIT, test "x$ac_cv_header_mk4_h" = "xyes" )
+ 
+ 
