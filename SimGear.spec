@@ -6,6 +6,7 @@ Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
+# Source0-md5:	1711909a9175a193ae2c3c7093d2745c
 Patch0:		%{name}-shared.patch
 URL:		http://www.simgear.org/
 Requires:	OpenGL
