@@ -73,8 +73,8 @@ Statyczne biblioteki SimGear.
 rm -f missing
 libtoolize --force --copy
 aclocal -I .
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 %configure \
 	--with-x \
 	--with-tcl=/usr/lib
