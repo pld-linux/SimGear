@@ -3,12 +3,12 @@ Summary(pl):	zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp.
 Name:		SimGear
 Version:	0.0.14
 Release:	2
+License:	GPL
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
-License:	GPL
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-shared.patch
@@ -93,11 +93,11 @@ automake -a -c
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
-%{__make} DESTDIR="$RPM_BUILD_ROOT" install
 
-%post devel -p /sbin/ldconfig
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-%postun devel -p /sbin/ldconfig
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -110,10 +110,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc simgear/metakit/doc/*.html
 %doc simgear/metakit/doc/api
-%attr(755,root,root) %{_libdir}/*.so
-%attr(755,root,root) %{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/*.a
+%{_libdir}/lib*.a
