@@ -522,18 +522,49 @@ diff -Naur SimGear-0.3.5/simgear/serial/Makefile.am SimGear-0.3.5-p/simgear/seri
 diff -Naur SimGear-0.3.5/simgear/sound/Makefile.am SimGear-0.3.5-p/simgear/sound/Makefile.am
 --- SimGear-0.3.5/simgear/sound/Makefile.am	Fri May  9 19:29:07 2003
 +++ SimGear-0.3.5-p/simgear/sound/Makefile.am	Mon Mar 29 11:47:56 2004
-@@ -1,11 +1,11 @@
- includedir = @includedir@/sound
+@@ -2,34 +2,37 @@
+ 
+ EXTRA_DIST = jet.wav
  
 -lib_LIBRARIES = libsgsound.a
 +lib_LTLIBRARIES = libsgsound.la
  
  noinst_HEADERS =
  
- include_HEADERS = sound.hxx soundmgr.hxx
+ include_HEADERS = \
+ 	sample_openal.hxx \
+ 	soundmgr_openal.hxx \
+ 	xmlsound.hxx 
  
--libsgsound_a_SOURCES = sound.cxx soundmgr.cxx
-+libsgsound_la_SOURCES = sound.cxx soundmgr.cxx
+-libsgsound_a_SOURCES = \
++libsgsound_la_SOURCES = \
+ 	sample_openal.cxx  \
+ 	soundmgr_openal.cxx \
+ 	xmlsound.cxx 
+ 
+ noinst_PROGRAMS = openal_test1 openal_test2
+ 
+ openal_test1_SOURCES = openal_test1.cxx
+ openal_test2_SOURCES = openal_test2.cxx
+ 
+ openal_test1_LDADD = \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
+ 	$(openal_LIBS)
+ 
+ openal_test2_LDADD = \
+-	$(top_builddir)/simgear/sound/libsgsound.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
+-	$(top_builddir)/simgear/structure/libsgstructure.a \
++	$(top_builddir)/simgear/sound/libsgsound.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
++	$(top_builddir)/simgear/structure/libsgstructure.la \
++	$(top_builddir)/simgear/props/libsgprops.la \
++	$(top_builddir)/simgear/xml/libsgxml.la \
++	-lz \
+ 	$(openal_LIBS)
  
  INCLUDES = -I$(top_srcdir)
 diff -Naur SimGear-0.3.5/simgear/structure/Makefile.am SimGear-0.3.5-p/simgear/structure/Makefile.am
