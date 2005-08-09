@@ -23,7 +23,7 @@ BuildRequires:	plib-devel >= 1.8.4
 BuildRequires:	tcl-devel
 BuildRequires:	zlib-devel
 Requires:	OpenGL
-Requires:	plib >= 1.8.0
+Requires:	plib >= 1.8.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
