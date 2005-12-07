@@ -9,25 +9,6 @@ diff -Naur SimGear-0.3.5/simgear/misc/Makefile.am SimGear-0.3.5-p/simgear/misc/M
  	-lz
  
  INCLUDES = -I$(top_srcdir)
-diff -Naur SimGear-0.3.5/simgear/Makefile.am SimGear-0.3.5-p/simgear/Makefile.am
---- SimGear-0.3.5/simgear/Makefile.am	Mon Mar 29 12:29:11 2004
-+++ SimGear-0.3.5-p/simgear/Makefile.am	Mon Mar 29 12:29:46 2004
-@@ -18,6 +18,7 @@
- 	debug \
- 	structure \
- 	timing \
-+	props \
- 	misc \
- 	bucket \
- 	ephemeris \
-@@ -27,7 +28,6 @@
- 	math \
- 	$(METAR_DIRS) \
- 	nasal \
--	props \
- 	route \
- 	scene \
- 	screen \
 diff -Naur SimGear-0.3.5/simgear/props/Makefile.am SimGear-0.3.5-p/simgear/props/Makefile.am
 --- SimGear-0.3.5/simgear/props/Makefile.am	Mon Mar 29 12:29:11 2004
 +++ SimGear-0.3.5-p/simgear/props/Makefile.am	Mon Mar 29 12:30:07 2004
@@ -145,3 +126,33 @@ diff -Naur SimGear-0.3.5/simgear/route/Makefile.am SimGear-0.3.5-p/simgear/route
 +	$(top_builddir)/simgear/structure/libsgstructure.la \
  	-lz
  	$(base_LIBS)
+--- SimGear-0.3.9.old/simgear/Makefile.am	2005-12-07 19:31:45.000000000 +0100
++++ SimGear-0.3.9/simgear/Makefile.am	2005-12-07 20:52:26.000000000 +0100
+@@ -16,8 +16,11 @@
+ 	$(compatibility_DIR) \
+ 	xml \
+ 	debug \
+-	misc \
++	props \
++	serial \
+ 	structure \
++	timing \
++	misc \
+ 	bucket \
+ 	ephemeris \
+ 	io \
+@@ -25,13 +28,10 @@
+ 	math \
+ 	$(METAR_DIRS) \
+ 	nasal \
+-	props \
+ 	route \
+ 	scene \
+ 	screen \
+-	serial \
+ 	sound \
+-	$(SGTHREAD_DIR) \
+-	timing
++	$(SGTHREAD_DIR)
+ 
+ DIST_SUBDIRS = $(SUBDIRS) compatibility threads

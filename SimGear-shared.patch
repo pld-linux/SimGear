@@ -10,34 +10,6 @@ diff -Naur SimGear-0.3.5/configure.ac SimGear-0.3.5-p/configure.ac
  AC_PROG_INSTALL
  AC_PROG_LN_S
  
-diff -Naur SimGear-0.3.5/simgear/Makefile.am SimGear-0.3.5-p/simgear/Makefile.am
---- SimGear-0.3.5/simgear/Makefile.am	Thu Mar 18 15:51:22 2004
-+++ SimGear-0.3.5-p/simgear/Makefile.am	Mon Mar 29 11:47:51 2004
-@@ -16,10 +16,12 @@
- 	$(compatibility_DIR) \
- 	xml \
- 	debug \
--	misc \
- 	structure \
-+	timing \
-+	misc \
- 	bucket \
- 	ephemeris \
-+	serial \
- 	io \
- 	magvar \
- 	math \
-@@ -29,10 +31,8 @@
- 	route \
- 	scene \
- 	screen \
--	serial \
- 	sound \
- 	$(SGTHREAD_DIR) \
--	timing \
- 	xgl
- 
- DIST_SUBDIRS = $(SUBDIRS) compatibility threads
 diff -Naur SimGear-0.3.5/simgear/bucket/Makefile.am SimGear-0.3.5-p/simgear/bucket/Makefile.am
 --- SimGear-0.3.5/simgear/bucket/Makefile.am	Sat Sep  7 04:58:19 2002
 +++ SimGear-0.3.5-p/simgear/bucket/Makefile.am	Mon Mar 29 11:47:51 2004
@@ -79,10 +51,10 @@ diff -Naur SimGear-0.3.5/simgear/environment/Makefile.am SimGear-0.3.5-p/simgear
 -lib_LIBRARIES = libsgenvironment.a
 +lib_LTLIBRARIES = libsgenvironment.la
  
- include_HEADERS = metar.hxx
+ include_HEADERS = metar.hxx visual_enviro.hxx
  
--libsgenvironment_a_SOURCES = metar.cxx
-+libsgenvironment_la_SOURCES = metar.cxx
+-libsgenvironment_a_SOURCES = metar.cxx visual_enviro.cxx
++libsgenvironment_la_SOURCES = metar.cxx visual_enviro.cxx
  
  INCLUDES = -I$(top_srcdir)
 diff -Naur SimGear-0.3.5/simgear/ephemeris/Makefile.am SimGear-0.3.5-p/simgear/ephemeris/Makefile.am
@@ -414,46 +386,6 @@ diff -Naur SimGear-0.3.5/simgear/scene/model/Makefile.am SimGear-0.3.5-p/simgear
  	animation.cxx \
  	location.cxx \
  	model.cxx \
-diff -Naur SimGear-0.3.5/simgear/scene/sky/Makefile.am SimGear-0.3.5-p/simgear/scene/sky/Makefile.am
---- SimGear-0.3.5/simgear/scene/sky/Makefile.am	Mon Aug  4 19:45:34 2003
-+++ SimGear-0.3.5-p/simgear/scene/sky/Makefile.am	Mon Mar 29 11:47:56 2004
-@@ -2,7 +2,7 @@
- 
- SUBDIRS = clouds3d
- 
--lib_LIBRARIES = libsgsky.a
-+lib_LTLIBRARIES = libsgsky.la
- 
- include_HEADERS = \
- 	cloud.hxx \
-@@ -13,7 +13,7 @@
- 	sphere.hxx \
- 	stars.hxx
- 
--libsgsky_a_SOURCES = \
-+libsgsky_la_SOURCES = \
- 	cloud.cxx \
- 	dome.cxx \
- 	moon.cxx \
-diff -Naur SimGear-0.3.5/simgear/scene/sky/clouds3d/Makefile.am SimGear-0.3.5-p/simgear/scene/sky/clouds3d/Makefile.am
---- SimGear-0.3.5/simgear/scene/sky/clouds3d/Makefile.am	Mon Aug 11 23:17:02 2003
-+++ SimGear-0.3.5-p/simgear/scene/sky/clouds3d/Makefile.am	Mon Mar 29 11:47:56 2004
-@@ -9,13 +9,13 @@
-   EXTGL_SOURCE = 
- endif
- 
--lib_LIBRARIES = libsgclouds3d.a
-+lib_LTLIBRARIES = libsgclouds3d.la
- 
- include_HEADERS = \
- 	SkySceneLoader.hpp \
- 	SkyUtil.hpp
- 
--libsgclouds3d_a_SOURCES = \
-+libsgclouds3d_la_SOURCES = \
-         $(EXTGL_SOURCE) \
- 	vec3fv.cpp vec3fv.hpp vec3f.hpp vec4f.hpp vec2f.hpp \
- 	mat16fv.cpp mat16fv.hpp \
 diff -Naur SimGear-0.3.5/simgear/scene/tgdb/Makefile.am SimGear-0.3.5-p/simgear/scene/tgdb/Makefile.am
 --- SimGear-0.3.5/simgear/scene/tgdb/Makefile.am	Tue Dec 30 20:36:48 2003
 +++ SimGear-0.3.5-p/simgear/scene/tgdb/Makefile.am	Mon Mar 29 11:47:56 2004
@@ -626,24 +558,27 @@ diff -Naur SimGear-0.3.5/simgear/timing/Makefile.am SimGear-0.3.5-p/simgear/timi
  	geocoord.cxx \
  	lowleveltime.cxx \
  	sg_time.cxx \
-diff -Naur SimGear-0.3.5/simgear/xgl/Makefile.am SimGear-0.3.5-p/simgear/xgl/Makefile.am
---- SimGear-0.3.5/simgear/xgl/Makefile.am	Sat Sep  7 04:58:19 2002
-+++ SimGear-0.3.5-p/simgear/xgl/Makefile.am	Mon Mar 29 11:47:56 2004
-@@ -1,9 +1,9 @@
- includedir = @includedir@/xgl
+--- SimGear-0.3.9.old/simgear/scene/sky/Makefile.am	2005-12-07 19:31:44.000000000 +0100
++++ SimGear-0.3.9/simgear/scene/sky/Makefile.am	2005-12-07 19:54:21.000000000 +0100
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/sky
  
--lib_LIBRARIES = libsgxgl.a
-+lib_LTLIBRARIES = libsgxgl.la
+-lib_LIBRARIES = libsgsky.a
++lib_LIBRARIES = libsgsky.la
  
- include_HEADERS = xgl.h
+ include_HEADERS = \
+ 	cloud.hxx \
+@@ -14,7 +14,7 @@
+ 	cloudfield.hxx \
+ 	newcloud.hxx
  
--libsgxgl_a_SOURCES = xgl.c xglUtils.c
-+libsgxgl_la_SOURCES = xgl.c xglUtils.c
- 
- INCLUDES = -I$(top_srcdir)
-diff -Naur SimGear-0.3.5/simgear/xml/Makefile.am SimGear-0.3.5-p/simgear/xml/Makefile.am
---- SimGear-0.3.5/simgear/xml/Makefile.am	Fri Aug 29 19:36:30 2003
-+++ SimGear-0.3.5-p/simgear/xml/Makefile.am	Mon Mar 29 11:47:56 2004
+-libsgsky_a_SOURCES = \
++libsgsky_la_SOURCES = \
+ 	cloud.cxx \
+ 	dome.cxx \
+ 	moon.cxx \
+--- SimGear-0.3.9.old/simgear/xml/Makefile.am	2005-12-07 19:31:44.000000000 +0100
++++ SimGear-0.3.9/simgear/xml/Makefile.am	2005-12-07 20:03:24.000000000 +0100
 @@ -1,6 +1,6 @@
  includedir = @includedir@/xml
  
