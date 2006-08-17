@@ -1,14 +1,14 @@
+# TODO: Consider getting back to static linking or set sonames for shared libraries
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
-Version:	0.3.9
+Version:	0.3.10
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
-# Source0-md5:	c9586d2ddc6a8200ccaae437eaa2be14
+# Source0-md5:	469e17b08ed4267a33dbd19eabdd976b
 Patch0:		%{name}-shared.patch
-Patch1:		%{name}-libs.patch
 URL:		http://www.simgear.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -73,7 +73,6 @@ Statyczne biblioteki SimGear.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
