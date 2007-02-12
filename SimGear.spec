@@ -1,6 +1,6 @@
 # TODO: Consider getting back to static linking or set sonames for shared libraries
 Summary:	A set of libraries to build 3d simulations, games etc
-Summary(pl.UTF-8):   Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
+Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
 Version:	0.3.10
 Release:	1
@@ -45,7 +45,7 @@ W tej chwili jest jeszcze trochę za wcześnie na używanie terminu
 
 %package devel
 Summary:	Header files for SimGear
-Summary(pl.UTF-8):   Pliki nagłówkowe dla SimGear
+Summary(pl.UTF-8):	Pliki nagłówkowe dla SimGear
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	OpenAL-devel
@@ -60,7 +60,7 @@ Pliki nagłówkowe potrzebne do budowania aplikacji z SimGearem.
 
 %package static
 Summary:	Static SimGear libraries
-Summary(pl.UTF-8):   Statyczne biblioteki SimGear
+Summary(pl.UTF-8):	Statyczne biblioteki SimGear
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
