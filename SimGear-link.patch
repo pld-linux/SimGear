@@ -1,0 +1,95 @@
+--- SimGear-0.3.10/simgear/math/Makefile.am~	2007-05-27 22:53:42.188543954 +0200
++++ SimGear-0.3.10/simgear/math/Makefile.am	2007-05-27 22:59:01.806577335 +0200
+@@ -51,4 +51,8 @@
+ 	fastmath.cxx \
+ 	SGGeodesy.cxx
+ 
++libsgmath_la_LIBADD = \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la
++
+ INCLUDES = -I$(top_srcdir)
+--- SimGear-0.3.10/simgear/screen/Makefile.am~	2007-05-27 23:11:02.950348097 +0200
++++ SimGear-0.3.10/simgear/screen/Makefile.am	2007-05-27 23:33:34.620784199 +0200
+@@ -35,6 +35,10 @@
+ 	shader.cpp \
+ 	win32-printer.h
+ 
++libsgscreen_la_LIBADD = \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	-lz -lplibssg
++
+ if HAVE_GLUT
+ noinst_PROGRAMS = TestRenderTexture
+ 
+--- SimGear-0.3.10/simgear/route/Makefile.am~	2007-05-27 23:05:59.287884796 +0200
++++ SimGear-0.3.10/simgear/route/Makefile.am	2007-05-27 23:08:36.070442820 +0200
+@@ -8,6 +8,9 @@
+ 	route.cxx \
+ 	waypoint.cxx
+ 
++libsgroute_la_LIBADD = \
++	$(top_builddir)/simgear/math/libsgmath.la
++
+ INCLUDES = -I$(top_srcdir)
+ 
+ noinst_PROGRAMS = waytest routetest
+--- SimGear-0.3.10/simgear/props/Makefile.am~	2007-05-27 21:52:35.410553253 +0200
++++ SimGear-0.3.10/simgear/props/Makefile.am	2007-05-27 21:55:39.894540760 +0200
+@@ -12,6 +12,8 @@
+ 	props.cxx \
+ 	props_io.cxx
+ 
++libsgprops_la_LIBADD = \
++	$(top_builddir)/simgear/xml/libsgxml.la
+ 
+ # NOTE: Looped dependencies misc and props test files, commenting this one out
+ # noinst_PROGRAMS = props_test
+--- SimGear-0.3.10/simgear/sound/Makefile.am~	2007-05-27 23:34:49.685625164 +0200
++++ SimGear-0.3.10/simgear/sound/Makefile.am	2007-05-27 23:42:58.372038859 +0200
+@@ -16,6 +16,13 @@
+ 	soundmgr_openal.cxx \
+ 	xmlsound.cxx 
+ 
++libsgsound_la_LIBADD = \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
++	$(top_builddir)/simgear/props/libsgprops.la \
++	$(top_builddir)/simgear/structure/libsgstructure.la \
++	-lalut
++
+ noinst_PROGRAMS = openal_test1 openal_test2
+ 
+ openal_test1_SOURCES = openal_test1.cxx
+--- SimGear-0.3.10/simgear/misc/Makefile.am~	2007-05-27 21:50:20.566487449 +0200
++++ SimGear-0.3.10/simgear/misc/Makefile.am	2007-05-27 21:55:08.796678047 +0200
+@@ -22,6 +22,12 @@
+ 	zfstream.cxx \
+ 	interpolator.cxx
+ 
++libsgmisc_la_LIBADD = \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/structure/libsgstructure.la \
++	$(top_builddir)/simgear/props/libsgprops.la \
++	-lz
++	
+ noinst_PROGRAMS = tabbed_value_test swap_test
+ 
+ tabbed_value_test_SOURCES = tabbed_values_test.cxx
+--- SimGear-0.3.10/simgear/io/Makefile.am~	2007-05-27 22:00:31.414505255 +0200
++++ SimGear-0.3.10/simgear/io/Makefile.am	2007-05-27 22:13:53.776027440 +0200
+@@ -20,6 +20,14 @@
+ 	sg_socket.cxx \
+ 	sg_socket_udp.cxx 
+ 
++libsgio_la_LIBADD = \
++	$(top_builddir)/simgear/bucket/libsgbucket.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
++	$(top_builddir)/simgear/serial/libsgserial.la \
++	-lplibnet \
++	-lz
++
+ INCLUDES = -I$(top_srcdir)
+ 
+ noinst_PROGRAMS = decode_binobj socktest lowtest tcp_server tcp_client
