@@ -1,25 +1,28 @@
-# TODO: Consider getting back to static linking or set sonames for shared libraries
+# TODO: Add missing BRs for xorg
+#	Consider getting back to static linking or set sonames for shared libraries
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
 Version:	0.3.10
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
 # Source0-md5:	469e17b08ed4267a33dbd19eabdd976b
 Patch0:		%{name}-shared.patch
+Patch1:		%{name}-link.patch
 URL:		http://www.simgear.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
-BuildRequires:	XFree86-devel
+#BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	glut-devel
+BuildRequires:	freealut-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	metakit-devel >= 2.4.3
-BuildRequires:	plib-devel >= 1.8.4
+BuildRequires:	OpenGL-glut-devel
+BuildRequires:	plib-devel >= 1.8.4-3
 BuildRequires:	tcl-devel
 BuildRequires:	zlib-devel
 Requires:	OpenGL
@@ -73,6 +76,7 @@ Statyczne biblioteki SimGear.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -82,7 +86,7 @@ Statyczne biblioteki SimGear.
 %configure \
 	--with-x \
 	--with-tcl=/usr/lib
-%{__make}
+%{__make} -j 1
 
 %install
 rm -rf $RPM_BUILD_ROOT
