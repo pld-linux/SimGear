@@ -387,21 +387,6 @@
  	geocoord.cxx \
  	lowleveltime.cxx \
  	sg_time.cxx \
---- SimGear-0.3.10.clean_build/simgear/nasal/Makefile.am.orig	2006-08-16 15:24:15.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/nasal/Makefile.am	2006-08-16 15:14:51.000000000 -0700
-@@ -1,10 +1,10 @@
- includedir = @includedir@/nasal
- 
--lib_LIBRARIES = libsgnasal.a
-+lib_LTLIBRARIES = libsgnasal.la
- 
- include_HEADERS = nasal.h
- 
--libsgnasal_a_SOURCES = \
-+libsgnasal_la_SOURCES = \
- 	code.c code.h \
- 	codegen.c \
-         data.h \
 --- SimGear-0.3.10.clean_build/simgear/route/Makefile.am.orig	2006-08-16 15:24:50.000000000 -0700
 +++ SimGear-0.3.10.clean_build/simgear/route/Makefile.am	2006-08-16 15:14:51.000000000 -0700
 @@ -1,10 +1,10 @@
@@ -696,3 +681,18 @@
  	cloud.cxx \
  	dome.cxx \
  	moon.cxx \
+--- SimGear-0.3.11-pre1/simgear/nasal/Makefile.am~	2007-08-28 00:26:13.608695051 +0200
++++ SimGear-0.3.11-pre1/simgear/nasal/Makefile.am	2007-08-28 00:29:22.356844959 +0200
+@@ -1,10 +1,10 @@
+ includedir = @includedir@/nasal
+ 
+-lib_LIBRARIES = libsgnasal.a
++lib_LTLIBRARIES = libsgnasal.la
+ 
+ include_HEADERS = nasal.h naref.h
+ 
+-libsgnasal_a_SOURCES = bitslib.c code.c code.h codegen.c data.h gc.c	\
++libsgnasal_la_SOURCES = bitslib.c code.c code.h codegen.c data.h gc.c	\
+                        hash.c iolib.c iolib.h lex.c lib.c mathlib.c	\
+                        misc.c naref.h nasal.h parse.c parse.h string.c	\
+                        thread-posix.c thread-win32.c threadlib.c	\
