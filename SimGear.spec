@@ -1,19 +1,21 @@
 # TODO: Add missing BRs for xorg
 #	Consider getting back to static linking or set sonames for shared libraries
+%define	_pre	pre1
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
-Version:	0.3.10
-Release:	1.2
-License:	GPL
+Version:	0.3.11
+Release:	0.%{_pre}.1
+License:	GPL v2+
 Group:		Libraries
-Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
-# Source0-md5:	469e17b08ed4267a33dbd19eabdd976b
+Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}-%{_pre}.tar.gz
+# Source0-md5:	9e7edc288dae1860a205321c9287c521
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-link.patch
 URL:		http://www.simgear.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
+BuildRequires:	OpenGL-glut-devel
 #BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -21,7 +23,6 @@ BuildRequires:	freealut-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	metakit-devel >= 2.4.3
-BuildRequires:	OpenGL-glut-devel
 BuildRequires:	plib-devel >= 1.8.4-3
 BuildRequires:	tcl-devel
 BuildRequires:	zlib-devel
@@ -41,7 +42,8 @@ point, but this is the direction we are heading with SimGear.
 
 %description -l pl.UTF-8
 SimGear to zestaw bibliotek zaprojektowanych do wykorzystania jako
-klocki do szybkiego zestawiania trójwymiarowych symulacji, gier...
+klocki do szybkiego zestawiania trójwymiarowych symulacji, gier oraz
+wizualnych aplikacji.
 
 W tej chwili jest jeszcze trochę za wcześnie na używanie terminu
 "Jądro Symulacji", ale to jest kierunek w którym zmierza SimGear.
@@ -74,7 +76,7 @@ Static SimGear libraries.
 Statyczne biblioteki SimGear.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{_pre}
 %patch0 -p1
 %patch1 -p1
 
