@@ -1,5 +1,6 @@
-# TODO: Add missing BRs for xorg
-#	Consider getting back to static linking or set sonames for shared libraries
+# TODO: - Add missing BRs for xorg
+#	- Consider getting back to static linking or set sonames for shared libraries
+#	- fix linking libsgprops.so and probably others .so files
 %define	_pre	pre1
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
