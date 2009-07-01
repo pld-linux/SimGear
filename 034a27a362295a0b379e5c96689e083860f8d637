@@ -1,0 +1,4 @@
+- updated to 1.9.1 version
+- build without -link.patch and -shared.patch
+- changes in %%files
+- new patches: -cstdio.patch, -tgdb.patch
