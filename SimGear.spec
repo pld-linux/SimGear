@@ -1,19 +1,25 @@
-# TODO: Add missing BRs for xorg
-#	Consider getting back to static linking or set sonames for shared libraries
+#
+# TODO: - Add missing BRs for xorg
+#	- Check if it works fine
+#
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
-Version:	0.3.10
-Release:	1.2
-License:	GPL
+Version:	1.9.1
+Release:	0.1
+License:	GPL v2+
 Group:		Libraries
 Source0:	ftp://ftp.simgear.org/pub/simgear/Source/%{name}-%{version}.tar.gz
-# Source0-md5:	469e17b08ed4267a33dbd19eabdd976b
+# Source0-md5:	edfdaa60518a06699a409d0eb9f1b157
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-link.patch
+Patch2:		%{name}-cstdio.patch
+Patch3:		%{name}-tgdb.patch
 URL:		http://www.simgear.org/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
+BuildRequires:	OpenGL-glut-devel
+BuildRequires:	OpenSceneGraph-devel
 #BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -21,7 +27,6 @@ BuildRequires:	freealut-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	metakit-devel >= 2.4.3
-BuildRequires:	OpenGL-glut-devel
 BuildRequires:	plib-devel >= 1.8.4-3
 BuildRequires:	tcl-devel
 BuildRequires:	zlib-devel
@@ -41,7 +46,8 @@ point, but this is the direction we are heading with SimGear.
 
 %description -l pl.UTF-8
 SimGear to zestaw bibliotek zaprojektowanych do wykorzystania jako
-klocki do szybkiego zestawiania trójwymiarowych symulacji, gier...
+klocki do szybkiego zestawiania trójwymiarowych symulacji, gier oraz
+wizualnych aplikacji.
 
 W tej chwili jest jeszcze trochę za wcześnie na używanie terminu
 "Jądro Symulacji", ale to jest kierunek w którym zmierza SimGear.
@@ -75,8 +81,10 @@ Statyczne biblioteki SimGear.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+#%%patch0 -p1
+#%%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
@@ -103,13 +111,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+#%%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc TODO
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+#%%{_libdir}/lib*.la
 %{_includedir}/simgear
 
 %files static
