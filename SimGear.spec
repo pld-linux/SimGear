@@ -1,6 +1,6 @@
 #
 # TODO: - Add missing BRs for xorg
-#	- Check if it works fine
+#	- Consider getting back to static linking or set sonames for shared libraries
 #
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
