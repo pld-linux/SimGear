@@ -1,156 +1,18 @@
---- SimGear-0.3.10.clean_build/simgear/environment/Makefile.am.orig	2006-08-16 15:22:09.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/environment/Makefile.am	2006-08-16 15:14:48.000000000 -0700
-@@ -1,9 +1,9 @@
- includedir = @includedir@/environment
- 
--lib_LIBRARIES = libsgenvironment.a
-+lib_LTLIBRARIES = libsgenvironment.la
- 
- include_HEADERS = metar.hxx visual_enviro.hxx
- 
--libsgenvironment_a_SOURCES = metar.cxx visual_enviro.cxx
-+libsgenvironment_la_SOURCES = metar.cxx visual_enviro.cxx
- 
- INCLUDES = -I$(top_srcdir)
---- SimGear-0.3.10.clean_build/simgear/magvar/Makefile.am.orig	2006-08-16 15:23:27.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/magvar/Makefile.am	2006-08-16 15:14:48.000000000 -0700
-@@ -1,10 +1,10 @@
- includedir = @includedir@/magvar
- 
--lib_LIBRARIES = libsgmagvar.a
-+lib_LTLIBRARIES = libsgmagvar.la
- 
- include_HEADERS = magvar.hxx
- 
--libsgmagvar_a_SOURCES = \
-+libsgmagvar_la_SOURCES = \
- 	coremag.hxx coremag.cxx \
- 	magvar.cxx
- 
-@@ -13,7 +13,7 @@
- testmagvar_SOURCES = testmagvar.cxx
- 
- testmagvar_LDADD = \
--	$(top_builddir)/simgear/magvar/libsgmagvar.a \
-+	$(top_builddir)/simgear/magvar/libsgmagvar.la \
- 	$(base_LIBS)
- 
- INCLUDES = -I$(top_srcdir)
---- SimGear-0.3.10.clean_build/simgear/io/Makefile.am.orig	2006-08-16 15:23:05.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/io/Makefile.am	2006-08-16 15:14:49.000000000 -0700
-@@ -1,6 +1,6 @@
- includedir = @includedir@/io
- 
--lib_LIBRARIES = libsgio.a
-+lib_LTLIBRARIES = libsgio.la
- 
- include_HEADERS = \
- 	iochannel.hxx \
-@@ -11,7 +11,7 @@
- 	sg_socket.hxx \
- 	sg_socket_udp.hxx
- 
--libsgio_a_SOURCES = \
-+libsgio_la_SOURCES = \
- 	iochannel.cxx \
- 	lowlevel.cxx \
- 	sg_binobj.cxx \
-@@ -27,10 +27,14 @@
- tcp_server_SOURCES = tcp_server.cxx
- 
- tcp_server_LDADD = \
--	$(top_builddir)/simgear/io/libsgio.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/bucket/libsgbucket.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
-+	$(top_builddir)/simgear/io/libsgio.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/bucket/libsgbucket.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/serial/libsgserial.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
- 	-lplibnet -lplibul -lz \
- 	$(network_LIBS) \
- 	$(base_LIBS)
-@@ -38,10 +42,14 @@
- tcp_client_SOURCES = tcp_client.cxx
- 
- tcp_client_LDADD = \
--	$(top_builddir)/simgear/io/libsgio.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/bucket/libsgbucket.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
-+	$(top_builddir)/simgear/io/libsgio.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/bucket/libsgbucket.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/serial/libsgserial.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
- 	-lplibnet -lplibul -lz \
- 	$(network_LIBS) \
- 	$(base_LIBS)
-@@ -49,10 +57,15 @@
- socktest_SOURCES = socktest.cxx
- 
- socktest_LDADD = \
--	$(top_builddir)/simgear/io/libsgio.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/bucket/libsgbucket.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
-+	$(top_builddir)/simgear/io/libsgio.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/bucket/libsgbucket.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/serial/libsgserial.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
- 	-lplibnet -lplibul -lz \
- 	$(network_LIBS) \
- 	$(base_LIBS)
-@@ -60,17 +73,25 @@
- lowtest_SOURCES = lowtest.cxx
- 
- lowtest_LDADD = \
--	$(top_builddir)/simgear/io/libsgio.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/bucket/libsgbucket.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
--	$(base_LIBS) -lz
-+	$(top_builddir)/simgear/io/libsgio.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/bucket/libsgbucket.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/serial/libsgserial.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
-+	$(base_LIBS) -lz -lplibnet -lplibul
- 
- decode_binobj_SOURCES = decode_binobj.cxx
- 
- decode_binobj_LDADD = \
--	$(top_builddir)/simgear/io/libsgio.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/bucket/libsgbucket.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
--	$(base_LIBS) -lz
-+	$(top_builddir)/simgear/io/libsgio.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/bucket/libsgbucket.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
-+	$(top_builddir)/simgear/serial/libsgserial.la \
-+	$(base_LIBS) -lz -lplibnet -lplibul
---- SimGear-0.3.10.clean_build/simgear/bucket/Makefile.am.orig	2006-08-16 15:21:20.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/bucket/Makefile.am	2006-08-16 15:14:49.000000000 -0700
+diff -uNr SimGear-1.9.1.orig/configure.ac SimGear-1.9.1/configure.ac
+--- SimGear-1.9.1.orig/configure.ac	2009-01-25 13:03:56.000000000 +0100
++++ SimGear-1.9.1/configure.ac	2009-08-11 14:32:11.000000000 +0200
+@@ -34,7 +34,7 @@
+ AC_PROG_CC
+ AC_PROG_CPP
+ AC_PROG_CXX
+-AC_PROG_RANLIB
++AC_PROG_LIBTOOL
+ AC_PROG_INSTALL
+ AC_PROG_LN_S
+ AX_BOOST_BASE([1.34.0])
+diff -uNr SimGear-1.9.1.orig/simgear/bucket/Makefile.am SimGear-1.9.1/simgear/bucket/Makefile.am
+--- SimGear-1.9.1.orig/simgear/bucket/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/bucket/Makefile.am	2009-08-11 14:32:11.000000000 +0200
 @@ -1,10 +1,10 @@
  includedir = @includedir@/bucket
  
@@ -164,27 +26,9 @@
  
  # noinst_PROGRAMS = testbucket
  
---- SimGear-0.3.10.clean_build/simgear/xml/Makefile.am.orig	2006-08-16 15:28:33.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/xml/Makefile.am	2006-08-16 15:14:49.000000000 -0700
-@@ -1,6 +1,6 @@
- includedir = @includedir@/xml
- 
--lib_LIBRARIES = libsgxml.a
-+lib_LTLIBRARIES = libsgxml.la
- 
- include_HEADERS = \
- 	easyxml.hxx
-@@ -8,7 +8,7 @@
- noinst_HEADERS = \
- 	xmltok_impl.c xmltok_ns.c
- 
--libsgxml_a_SOURCES = \
-+libsgxml_la_SOURCES = \
- 	asciitab.h \
- 	easyxml.cxx \
- 	hashtable.h hashtable.c \
---- SimGear-0.3.10.clean_build/simgear/debug/Makefile.am.orig	2006-08-16 15:21:47.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/debug/Makefile.am	2006-08-16 15:14:49.000000000 -0700
+diff -uNr SimGear-1.9.1.orig/simgear/debug/Makefile.am SimGear-1.9.1/simgear/debug/Makefile.am
+--- SimGear-1.9.1.orig/simgear/debug/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/debug/Makefile.am	2009-08-11 14:32:11.000000000 +0200
 @@ -2,10 +2,10 @@
  
  EXTRA_DIST = logtest.cxx
@@ -198,43 +42,24 @@
 +libsgdebug_la_SOURCES = logstream.cxx
  
  INCLUDES = -I$(top_srcdir)
---- SimGear-0.3.10.clean_build/simgear/misc/Makefile.am.orig	2006-08-16 15:23:58.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/misc/Makefile.am	2006-08-16 15:14:49.000000000 -0700
-@@ -1,6 +1,6 @@
- includedir = @includedir@/misc
+diff -uNr SimGear-1.9.1.orig/simgear/environment/Makefile.am SimGear-1.9.1/simgear/environment/Makefile.am
+--- SimGear-1.9.1.orig/simgear/environment/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/environment/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,9 +1,9 @@
+ includedir = @includedir@/environment
  
--lib_LIBRARIES = libsgmisc.a
-+lib_LTLIBRARIES = libsgmisc.la
+-lib_LIBRARIES = libsgenvironment.a
++lib_LTLIBRARIES = libsgenvironment.la
  
- include_HEADERS = \
- 	sg_path.hxx \
-@@ -13,7 +13,7 @@
- 	interpolator.hxx \
- 	stdint.hxx
+ include_HEADERS = metar.hxx visual_enviro.hxx precipitation.hxx
  
--libsgmisc_a_SOURCES = \
-+libsgmisc_la_SOURCES = \
- 	sg_path.cxx \
- 	sgstream.cxx \
- 	strutils.cxx \
-@@ -26,9 +26,12 @@
+-libsgenvironment_a_SOURCES = metar.cxx visual_enviro.cxx precipitation.cxx
++libsgenvironment_la_SOURCES = metar.cxx visual_enviro.cxx precipitation.cxx
  
- tabbed_value_test_SOURCES = tabbed_values_test.cxx
- tabbed_value_test_LDADD = \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
--	$(top_builddir)/simgear/xml/libsgxml.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	-lz
- 
- swap_test_SOURCES = swap_test.cpp
- 
---- SimGear-0.3.10.clean_build/simgear/ephemeris/Makefile.am.orig	2006-08-16 15:22:44.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/ephemeris/Makefile.am	2006-08-16 15:14:50.000000000 -0700
+ INCLUDES = -I$(top_srcdir)
+diff -uNr SimGear-1.9.1.orig/simgear/ephemeris/Makefile.am SimGear-1.9.1/simgear/ephemeris/Makefile.am
+--- SimGear-1.9.1.orig/simgear/ephemeris/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/ephemeris/Makefile.am	2009-08-11 14:32:11.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/ephemeris
  
@@ -252,8 +77,487 @@
  	celestialBody.cxx \
  	ephemeris.cxx \
  	jupiter.cxx \
---- SimGear-0.3.10.clean_build/simgear/sound/Makefile.am.orig	2006-08-16 15:27:06.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/sound/Makefile.am	2006-08-16 15:14:50.000000000 -0700
+diff -uNr SimGear-1.9.1.orig/simgear/io/Makefile.am SimGear-1.9.1/simgear/io/Makefile.am
+--- SimGear-1.9.1.orig/simgear/io/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/io/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/io
+ 
+-lib_LIBRARIES = libsgio.a
++lib_LTLIBRARIES = libsgio.la
+ 
+ include_HEADERS = \
+ 	iochannel.hxx \
+@@ -11,7 +11,7 @@
+ 	sg_socket.hxx \
+ 	sg_socket_udp.hxx
+ 
+-libsgio_a_SOURCES = \
++libsgio_la_SOURCES = \
+ 	iochannel.cxx \
+ 	lowlevel.cxx \
+ 	sg_binobj.cxx \
+@@ -27,10 +27,10 @@
+ tcp_server_SOURCES = tcp_server.cxx
+ 
+ tcp_server_LDADD = \
+-	libsgio.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/bucket/libsgbucket.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
++	libsgio.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/bucket/libsgbucket.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
+ 	-lplibnet -lplibul -lz \
+ 	$(network_LIBS) \
+ 	$(base_LIBS)
+@@ -38,10 +38,10 @@
+ tcp_client_SOURCES = tcp_client.cxx
+ 
+ tcp_client_LDADD = \
+-	libsgio.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/bucket/libsgbucket.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
++	libsgio.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/bucket/libsgbucket.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
+ 	-lplibnet -lplibul -lz \
+ 	$(network_LIBS) \
+ 	$(base_LIBS)
+@@ -49,10 +49,10 @@
+ socktest_SOURCES = socktest.cxx
+ 
+ socktest_LDADD = \
+-	libsgio.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/bucket/libsgbucket.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
++	libsgio.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/bucket/libsgbucket.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
+ 	-lplibnet -lplibul -lz \
+ 	$(network_LIBS) \
+ 	$(base_LIBS)
+@@ -60,17 +60,17 @@
+ lowtest_SOURCES = lowtest.cxx
+ 
+ lowtest_LDADD = \
+-	libsgio.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/bucket/libsgbucket.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
++	libsgio.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/bucket/libsgbucket.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
+ 	$(base_LIBS) -lz
+ 
+ decode_binobj_SOURCES = decode_binobj.cxx
+ 
+ decode_binobj_LDADD = \
+-	libsgio.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/bucket/libsgbucket.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
++	libsgio.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/bucket/libsgbucket.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
+ 	$(base_LIBS) -lz
+diff -uNr SimGear-1.9.1.orig/simgear/magvar/Makefile.am SimGear-1.9.1/simgear/magvar/Makefile.am
+--- SimGear-1.9.1.orig/simgear/magvar/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/magvar/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,10 +1,10 @@
+ includedir = @includedir@/magvar
+ 
+-lib_LIBRARIES = libsgmagvar.a
++lib_LTLIBRARIES = libsgmagvar.la
+ 
+ include_HEADERS = magvar.hxx
+ 
+-libsgmagvar_a_SOURCES = \
++libsgmagvar_la_SOURCES = \
+ 	coremag.hxx coremag.cxx \
+ 	magvar.cxx
+ 
+@@ -13,7 +13,7 @@
+ testmagvar_SOURCES = testmagvar.cxx
+ 
+ testmagvar_LDADD = \
+-	libsgmagvar.a \
++	libsgmagvar.la \
+ 	$(base_LIBS)
+ 
+ INCLUDES = -I$(top_srcdir)
+diff -uNr SimGear-1.9.1.orig/simgear/Makefile.am SimGear-1.9.1/simgear/Makefile.am
+--- SimGear-1.9.1.orig/simgear/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/Makefile.am	2009-08-11 14:33:26.000000000 +0200
+@@ -16,22 +16,22 @@
+ 	$(compatibility_DIR) \
+ 	xml \
+ 	debug \
+-	misc \
++	timing \ 
+ 	structure \
++	props \
++	misc \
+ 	bucket \
+ 	ephemeris \
++	serial \
+ 	io \
+ 	magvar \
+ 	math \
+ 	$(METAR_DIRS) \
+ 	nasal \
+-	props \
+ 	route \
+ 	scene \
+ 	screen \
+-	serial \
+ 	sound \
+-	$(SGTHREAD_DIR) \
+-	timing
++	$(SGTHREAD_DIR)
+ 
+ DIST_SUBDIRS = $(SUBDIRS) compatibility
+diff -uNr SimGear-1.9.1.orig/simgear/math/Makefile.am SimGear-1.9.1/simgear/math/Makefile.am
+--- SimGear-1.9.1.orig/simgear/math/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/math/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -4,12 +4,12 @@
+ TESTS           = $(check_PROGRAMS)
+ 
+ SGMathTest_SOURCES = SGMathTest.cxx
+-SGMathTest_LDADD = libsgmath.a $(base_LIBS)
++SGMathTest_LDADD = libsgmath.la $(base_LIBS)
+ 
+ SGGeometryTest_SOURCES = SGGeometryTest.cxx
+-SGGeometryTest_LDADD = libsgmath.a $(base_LIBS)
++SGGeometryTest_LDADD = libsgmath.la $(base_LIBS)
+ 
+-lib_LIBRARIES = libsgmath.a
++lib_LTLIBRARIES = libsgmath.la
+ 
+ include_HEADERS = \
+ 	interpolater.hxx \
+@@ -44,7 +44,7 @@
+ 	SGVec3.hxx \
+ 	SGVec4.hxx
+ 
+-libsgmath_a_SOURCES = \
++libsgmath_la_SOURCES = \
+ 	interpolater.cxx \
+ 	leastsqs.cxx \
+ 	sg_random.c \
+diff -uNr SimGear-1.9.1.orig/simgear/misc/Makefile.am SimGear-1.9.1/simgear/misc/Makefile.am
+--- SimGear-1.9.1.orig/simgear/misc/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/misc/Makefile.am	2009-08-11 14:34:32.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/misc
+ 
+-lib_LIBRARIES = libsgmisc.a
++lib_LTLIBRARIES = libsgmisc.la
+ 
+ include_HEADERS = \
+ 	sg_path.hxx \
+@@ -14,7 +14,7 @@
+ 	stdint.hxx \
+ 	PathOptions.hxx
+ 
+-libsgmisc_a_SOURCES = \
++libsgmisc_la_SOURCES = \
+ 	sg_path.cxx \
+ 	sgstream.cxx \
+ 	strutils.cxx \
+@@ -28,15 +28,15 @@
+ 
+ tabbed_value_test_SOURCES = tabbed_values_test.cxx
+ tabbed_value_test_LDADD = \
+-	libsgmisc.a \
+-	$(top_builddir)/simgear/xml/libsgxml.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a
++	libsgmisc.la \
++	$(top_builddir)/simgear/xml/libsgxml.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la
+ 
+ $(top_builddir)/simgear/xml/libsgxml.a:
+-	cd $(top_builddir)/simgear/xml && $(MAKE) $(AM_MAKEFLAGS) libsgxml.a
++	cd $(top_builddir)/simgear/xml && $(MAKE) $(AM_MAKEFLAGS) libsgxml.la
+ 
+ $(top_builddir)/simgear/debug/libsgdebug.a:
+-	cd $(top_builddir)/simgear/debug && $(MAKE) $(AM_MAKEFLAGS) libsgdebug.a
++	cd $(top_builddir)/simgear/debug && $(MAKE) $(AM_MAKEFLAGS) libsgdebug.la
+ 
+ swap_test_SOURCES = swap_test.cpp
+ 
+diff -uNr SimGear-1.9.1.orig/simgear/nasal/Makefile.am SimGear-1.9.1/simgear/nasal/Makefile.am
+--- SimGear-1.9.1.orig/simgear/nasal/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/nasal/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,10 +1,10 @@
+ includedir = @includedir@/nasal
+ 
+-lib_LIBRARIES = libsgnasal.a
++lib_LTLIBRARIES = libsgnasal.la
+ 
+ include_HEADERS = nasal.h naref.h
+ 
+-libsgnasal_a_SOURCES = bitslib.c code.c code.h codegen.c data.h gc.c	\
++libsgnasal_la_SOURCES = bitslib.c code.c code.h codegen.c data.h gc.c	\
+                        hash.c iolib.c iolib.h lex.c lib.c mathlib.c	\
+                        misc.c naref.h nasal.h parse.c parse.h string.c	\
+                        thread-posix.c thread-win32.c threadlib.c	\
+diff -uNr SimGear-1.9.1.orig/simgear/props/Makefile.am SimGear-1.9.1/simgear/props/Makefile.am
+--- SimGear-1.9.1.orig/simgear/props/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/props/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,25 +1,27 @@
+ includedir = @includedir@/props
+ 
+-lib_LIBRARIES = libsgprops.a
++lib_LTLIBRARIES = libsgprops.la
+ 
+ include_HEADERS = \
+ 	condition.hxx \
+ 	props.hxx \
+ 	props_io.hxx
+ 
+-libsgprops_a_SOURCES = \
++libsgprops_la_SOURCES = \
+ 	condition.cxx \
+ 	props.cxx \
+ 	props_io.cxx
+ 
+-noinst_PROGRAMS = props_test
+ 
+-props_test_SOURCES = props_test.cxx
+-props_test_LDADD = \
+-	libsgprops.a \
+-	$(top_builddir)/simgear/xml/libsgxml.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/structure/libsgstructure.a
++# NOTE: Looped dependencies misc and props test files, commenting this one out
++# noinst_PROGRAMS = props_test
++
++# props_test_SOURCES = props_test.cxx
++# props_test_LDADD = \
++#	libsgprops.la \
++#	$(top_builddir)/simgear/xml/libsgxml.la \
++#	$(top_builddir)/simgear/misc/libsgmisc.la \
++#	$(top_builddir)/simgear/debug/libsgdebug.la \
++#	$(top_builddir)/simgear/structure/libsgstructure.la
+ 
+ INCLUDES = -I$(top_srcdir)
+diff -uNr SimGear-1.9.1.orig/simgear/route/Makefile.am SimGear-1.9.1/simgear/route/Makefile.am
+--- SimGear-1.9.1.orig/simgear/route/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/route/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,10 +1,10 @@
+ includedir = @includedir@/route
+ 
+-lib_LIBRARIES = libsgroute.a
++lib_LTLIBRARIES = libsgroute.la
+ 
+ include_HEADERS = route.hxx waypoint.hxx
+ 
+-libsgroute_a_SOURCES = \
++libsgroute_la_SOURCES = \
+ 	route.cxx \
+ 	waypoint.cxx
+ 
+@@ -15,21 +15,21 @@
+ waytest_SOURCES = waytest.cxx
+ 
+ waytest_LDADD = \
+-	libsgroute.a \
+-	$(top_builddir)/simgear/math/libsgmath.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/misc/libsgmisc.a \
+-	$(top_builddir)/simgear/props/libsgprops.a \
+-	$(top_builddir)/simgear/structure/libsgstructure.a \
+-	$(top_builddir)/simgear/xml/libsgxml.a \
++	libsgroute.la \
++	$(top_builddir)/simgear/math/libsgmath.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/misc/libsgmisc.la \
++	$(top_builddir)/simgear/props/libsgprops.la \
++	$(top_builddir)/simgear/structure/libsgstructure.la \
++	$(top_builddir)/simgear/xml/libsgxml.la \
+ 	$(base_LIBS) \
+ 	-lz
+ 
+ routetest_SOURCES = routetest.cxx
+ 
+ routetest_LDADD = \
+-	libsgroute.a \
+-	$(top_builddir)/simgear/math/libsgmath.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
+-	$(top_builddir)/simgear/structure/libsgstructure.a \
++	libsgroute.la \
++	$(top_builddir)/simgear/math/libsgmath.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
++	$(top_builddir)/simgear/structure/libsgstructure.la \
+ 	$(base_LIBS)
+diff -uNr SimGear-1.9.1.orig/simgear/scene/material/Makefile.am SimGear-1.9.1/simgear/scene/material/Makefile.am
+--- SimGear-1.9.1.orig/simgear/scene/material/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/scene/material/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/material
+ 
+-lib_LIBRARIES = libsgmaterial.a
++lib_LTLIBRARIES = libsgmaterial.la
+ 
+ noinst_HEADERS =
+ 
+@@ -9,7 +9,7 @@
+ 	matlib.hxx \
+ 	matmodel.hxx
+ 
+-libsgmaterial_a_SOURCES = \
++libsgmaterial_la_SOURCES = \
+ 	mat.cxx \
+ 	matlib.cxx \
+ 	matmodel.cxx
+diff -uNr SimGear-1.9.1.orig/simgear/scene/model/Makefile.am SimGear-1.9.1/simgear/scene/model/Makefile.am
+--- SimGear-1.9.1.orig/simgear/scene/model/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/scene/model/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/model
+ 
+-lib_LIBRARIES = libsgmodel.a
++lib_LTLIBRARIES = libsgmodel.la
+ 
+ noinst_HEADERS =
+ 
+@@ -25,7 +25,7 @@
+ 	SGScaleTransform.hxx \
+ 	SGTranslateTransform.hxx
+ 
+-libsgmodel_a_SOURCES = \
++libsgmodel_la_SOURCES = \
+ 	animation.cxx \
+ 	particles.cxx \
+ 	location.cxx \
+diff -uNr SimGear-1.9.1.orig/simgear/scene/sky/Makefile.am SimGear-1.9.1/simgear/scene/sky/Makefile.am
+--- SimGear-1.9.1.orig/simgear/scene/sky/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/scene/sky/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/sky
+ 
+-lib_LIBRARIES = libsgsky.a
++lib_LTLIBRARIES = libsgsky.la
+ 
+ include_HEADERS = \
+ 	cloud.hxx \
+@@ -15,7 +15,7 @@
+ 	newcloud.hxx \
+ 	CloudShaderGeometry.hxx
+ 
+-libsgsky_a_SOURCES = \
++libsgsky_la_SOURCES = \
+ 	cloud.cxx \
+ 	dome.cxx \
+ 	moon.cxx \
+diff -uNr SimGear-1.9.1.orig/simgear/scene/tgdb/Makefile.am SimGear-1.9.1/simgear/scene/tgdb/Makefile.am
+--- SimGear-1.9.1.orig/simgear/scene/tgdb/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/scene/tgdb/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/tgdb
+ 
+-lib_LIBRARIES = libsgtgdb.a
++lib_LTLIBRARIES = libsgtgdb.la
+ 
+ noinst_HEADERS =
+ 
+@@ -24,7 +24,7 @@
+ 	TileCache.hxx \
+ 	TileEntry.hxx
+ 
+-libsgtgdb_a_SOURCES = \
++libsgtgdb_la_SOURCES = \
+ 	apt_signs.cxx \
+ 	obj.cxx \
+ 	pt_lights.cxx \
+diff -uNr SimGear-1.9.1.orig/simgear/scene/util/Makefile.am SimGear-1.9.1/simgear/scene/util/Makefile.am
+--- SimGear-1.9.1.orig/simgear/scene/util/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/scene/util/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/scene/util
+ 
+-lib_LIBRARIES = libsgutil.a
++lib_LTLIBRARIES = libsgutil.la
+ 
+ noinst_HEADERS =
+ 
+@@ -21,7 +21,7 @@
+ 	VectorArrayAdapter.hxx
+ 
+ 
+-libsgutil_a_SOURCES = \
++libsgutil_la_SOURCES = \
+ 	SGEnlargeBoundingBox.cxx \
+ 	SGSceneFeatures.cxx \
+ 	SGSceneUserData.cxx \
+diff -uNr SimGear-1.9.1.orig/simgear/screen/Makefile.am SimGear-1.9.1/simgear/screen/Makefile.am
+--- SimGear-1.9.1.orig/simgear/screen/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/screen/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/screen
+ 
+-lib_LIBRARIES = libsgscreen.a
++lib_LTLIBRARIES = libsgscreen.la
+ 
+ EXTRA_DIST = jpgfactory.cxx jpgfactory.hxx
+ 
+@@ -24,7 +24,7 @@
+ 	shader.h \
+ 	tr.h
+ 
+-libsgscreen_a_SOURCES = \
++libsgscreen_la_SOURCES = \
+ 	texture.cxx \
+ 	GLBitmaps.cxx \
+ 	$(IMAGE_SERVER_SRCS) \
+@@ -41,8 +41,8 @@
+ TestRenderTexture_SOURCES = TestRenderTexture.cpp
+ 
+ TestRenderTexture_LDADD = \
+-	libsgscreen.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a \
++	libsgscreen.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la \
+ 	$(opengl_LIBS)
+ endif
+ 
+diff -uNr SimGear-1.9.1.orig/simgear/serial/Makefile.am SimGear-1.9.1/simgear/serial/Makefile.am
+--- SimGear-1.9.1.orig/simgear/serial/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/serial/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,17 +1,17 @@
+ includedir = @includedir@/serial
+ 
+-lib_LIBRARIES = libsgserial.a
++lib_LTLIBRARIES = libsgserial.la
+ 
+ include_HEADERS = serial.hxx
+ 
+-libsgserial_a_SOURCES = serial.cxx
++libsgserial_la_SOURCES = serial.cxx
+ 
+ noinst_PROGRAMS = testserial
+ 
+ testserial_SOURCES = testserial.cxx
+ 
+ testserial_LDADD = \
+-	libsgserial.a \
+-	$(top_builddir)/simgear/debug/libsgdebug.a
++	libsgserial.la \
++	$(top_builddir)/simgear/debug/libsgdebug.la
+ 
+ INCLUDES = -I$(top_srcdir)
+diff -uNr SimGear-1.9.1.orig/simgear/sound/Makefile.am SimGear-1.9.1/simgear/sound/Makefile.am
+--- SimGear-1.9.1.orig/simgear/sound/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/sound/Makefile.am	2009-08-11 14:32:11.000000000 +0200
 @@ -2,7 +2,7 @@
  
  EXTRA_DIST = jet.wav
@@ -272,7 +576,7 @@
  	sample_openal.cxx  \
  	soundmgr_openal.cxx \
  	xmlsound.cxx 
-@@ -22,14 +22,17 @@
+@@ -22,14 +22,14 @@
  openal_test2_SOURCES = openal_test2.cxx
  
  openal_test1_LDADD = \
@@ -281,23 +585,40 @@
  	$(openal_LIBS)
  
  openal_test2_LDADD = \
--	$(top_builddir)/simgear/sound/libsgsound.a \
+-	libsgsound.a \
 -	$(top_builddir)/simgear/debug/libsgdebug.a \
 -	$(top_builddir)/simgear/misc/libsgmisc.a \
 -	$(top_builddir)/simgear/structure/libsgstructure.a \
--	$(openal_LIBS)
-+	$(top_builddir)/simgear/sound/libsgsound.la \
++	libsgsound.la \
 +	$(top_builddir)/simgear/debug/libsgdebug.la \
 +	$(top_builddir)/simgear/misc/libsgmisc.la \
 +	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
-+	$(openal_LIBS) \
-+	-lz
+ 	$(openal_LIBS)
  
- INCLUDES = -I$(top_srcdir)
---- SimGear-0.3.10.clean_build/simgear/threads/Makefile.am.orig	2006-08-16 15:28:10.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/threads/Makefile.am	2006-08-16 15:14:50.000000000 -0700
+ INCLUDES = -I$(top_srcdir) -DSRC_DIR=\"$(top_srcdir)/simgear/sound\"
+diff -uNr SimGear-1.9.1.orig/simgear/structure/Makefile.am SimGear-1.9.1/simgear/structure/Makefile.am
+--- SimGear-1.9.1.orig/simgear/structure/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/structure/Makefile.am	2009-08-11 14:32:11.000000000 +0200
+@@ -1,6 +1,6 @@
+ includedir = @includedir@/structure
+ 
+-lib_LIBRARIES = libsgstructure.a
++lib_LTLIBRARIES = libsgstructure.la
+ 
+ include_HEADERS = \
+ 	callback.hxx \
+@@ -19,7 +19,7 @@
+ 	SGSmplstat.hxx \
+ 	Singleton.hxx
+ 
+-libsgstructure_a_SOURCES = \
++libsgstructure_la_SOURCES = \
+ 	commands.cxx \
+ 	exception.cxx \
+ 	event_mgr.cxx\
+diff -uNr SimGear-1.9.1.orig/simgear/threads/Makefile.am SimGear-1.9.1/simgear/threads/Makefile.am
+--- SimGear-1.9.1.orig/simgear/threads/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/threads/Makefile.am	2009-08-11 14:32:11.000000000 +0200
 @@ -1,13 +1,13 @@
  includedir = @includedir@/threads
  
@@ -314,62 +635,9 @@
  	SGThread.cxx
  
  INCLUDES = -I$(top_srcdir)
---- SimGear-0.3.10.clean_build/simgear/props/Makefile.am.orig	2006-08-16 15:24:35.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/props/Makefile.am	2006-08-16 15:14:50.000000000 -0700
-@@ -1,13 +1,13 @@
- includedir = @includedir@/props
- 
--lib_LIBRARIES = libsgprops.a
-+lib_LTLIBRARIES = libsgprops.la
- 
- include_HEADERS = \
- 	condition.hxx \
- 	props.hxx \
- 	props_io.hxx
- 
--libsgprops_a_SOURCES = \
-+libsgprops_la_SOURCES = \
- 	condition.cxx \
- 	props.cxx \
- 	props_io.cxx
-@@ -16,10 +16,11 @@
- 
- props_test_SOURCES = props_test.cxx
- props_test_LDADD = \
--	$(top_builddir)/simgear/props/libsgprops.a \
--	$(top_builddir)/simgear/xml/libsgxml.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/structure/libsgstructure.a
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	-lz
- 
- INCLUDES = -I$(top_srcdir)
---- SimGear-0.3.10.clean_build/simgear/structure/Makefile.am.orig	2006-08-16 15:27:48.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/structure/Makefile.am	2006-08-16 15:14:51.000000000 -0700
-@@ -1,6 +1,6 @@
- includedir = @includedir@/structure
- 
--lib_LIBRARIES = libsgstructure.a
-+lib_LTLIBRARIES = libsgstructure.la
- 
- include_HEADERS = \
- 	callback.hxx \
-@@ -12,7 +12,7 @@
- 	SGReferenced.hxx \
- 	SGSharedPtr.hxx
- 
--libsgstructure_a_SOURCES = \
-+libsgstructure_la_SOURCES = \
- 	commands.cxx \
- 	exception.cxx \
- 	event_mgr.cxx\
---- SimGear-0.3.10.clean_build/simgear/timing/Makefile.am.orig	2006-08-16 15:28:24.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/timing/Makefile.am	2006-08-16 15:14:51.000000000 -0700
+diff -uNr SimGear-1.9.1.orig/simgear/timing/Makefile.am SimGear-1.9.1/simgear/timing/Makefile.am
+--- SimGear-1.9.1.orig/simgear/timing/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/timing/Makefile.am	2009-08-11 14:32:11.000000000 +0200
 @@ -1,6 +1,6 @@
  includedir = @includedir@/timing
  
@@ -387,312 +655,23 @@
  	geocoord.cxx \
  	lowleveltime.cxx \
  	sg_time.cxx \
---- SimGear-0.3.10.clean_build/simgear/nasal/Makefile.am.orig	2006-08-16 15:24:15.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/nasal/Makefile.am	2006-08-16 15:14:51.000000000 -0700
-@@ -1,10 +1,10 @@
- includedir = @includedir@/nasal
- 
--lib_LIBRARIES = libsgnasal.a
-+lib_LTLIBRARIES = libsgnasal.la
- 
- include_HEADERS = nasal.h
- 
--libsgnasal_a_SOURCES = \
-+libsgnasal_la_SOURCES = \
- 	code.c code.h \
- 	codegen.c \
-         data.h \
---- SimGear-0.3.10.clean_build/simgear/route/Makefile.am.orig	2006-08-16 15:24:50.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/route/Makefile.am	2006-08-16 15:14:51.000000000 -0700
-@@ -1,10 +1,10 @@
- includedir = @includedir@/route
- 
--lib_LIBRARIES = libsgroute.a
-+lib_LTLIBRARIES = libsgroute.la
- 
- include_HEADERS = route.hxx waypoint.hxx
- 
--libsgroute_a_SOURCES = \
-+libsgroute_la_SOURCES = \
- 	route.cxx \
- 	waypoint.cxx
- 
-@@ -15,17 +15,25 @@
- waytest_SOURCES = waytest.cxx
- 
- waytest_LDADD = \
--	$(top_builddir)/simgear/route/libsgroute.a \
--	$(top_builddir)/simgear/math/libsgmath.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(top_builddir)/simgear/misc/libsgmisc.a \
-+	$(top_builddir)/simgear/route/libsgroute.la \
-+	$(top_builddir)/simgear/math/libsgmath.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
- 	$(base_LIBS) \
- 	-lz
- 
- routetest_SOURCES = routetest.cxx
- 
- routetest_LDADD = \
--	$(top_builddir)/simgear/route/libsgroute.a \
--	$(top_builddir)/simgear/math/libsgmath.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(base_LIBS)
-+	$(top_builddir)/simgear/route/libsgroute.la \
-+	$(top_builddir)/simgear/math/libsgmath.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/misc/libsgmisc.la \
-+	$(top_builddir)/simgear/structure/libsgstructure.la \
-+	$(top_builddir)/simgear/props/libsgprops.la \
-+	$(top_builddir)/simgear/xml/libsgxml.la \
-+	$(base_LIBS) \
-+	-lz
---- SimGear-0.3.10.clean_build/simgear/screen/Makefile.am.orig	2006-08-16 15:26:15.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/screen/Makefile.am	2006-08-16 15:14:51.000000000 -0700
+diff -uNr SimGear-1.9.1.orig/simgear/xml/Makefile.am SimGear-1.9.1/simgear/xml/Makefile.am
+--- SimGear-1.9.1.orig/simgear/xml/Makefile.am	2009-01-25 13:00:32.000000000 +0100
++++ SimGear-1.9.1/simgear/xml/Makefile.am	2009-08-11 14:32:11.000000000 +0200
 @@ -1,6 +1,6 @@
- includedir = @includedir@/screen
+ includedir = @includedir@/xml
  
--lib_LIBRARIES = libsgscreen.a
-+lib_LTLIBRARIES = libsgscreen.la
- 
- EXTRA_DIST = jpgfactory.cxx jpgfactory.hxx
- 
-@@ -24,7 +24,7 @@
- 	shader.h \
- 	tr.h
- 
--libsgscreen_a_SOURCES = \
-+libsgscreen_la_SOURCES = \
- 	texture.cxx \
- 	GLBitmaps.cxx \
- 	$(IMAGE_SERVER_SRCS) \
-@@ -41,9 +41,10 @@
- TestRenderTexture_SOURCES = TestRenderTexture.cpp
- 
- TestRenderTexture_LDADD = \
--	$(top_builddir)/simgear/screen/libsgscreen.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a \
--	$(opengl_LIBS)
-+	$(top_builddir)/simgear/screen/libsgscreen.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(opengl_LIBS) -lz \
-+	-lplibssg -lplibsg -lplibul
- endif
- 
- INCLUDES = -I$(top_srcdir) -I$(top_builddir) -DGLX_GLXEXT_PROTOTYPES
---- SimGear-0.3.10.clean_build/simgear/math/Makefile.am.orig	2006-08-16 15:23:41.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/math/Makefile.am	2006-08-16 15:14:52.000000000 -0700
-@@ -5,10 +5,10 @@
- TESTS           = $(check_PROGRAMS)
- 
- SGMathTest_SOURCES = SGMathTest.cxx
--SGMathTest_LDADD = libsgmath.a $(base_LIBS)
-+# SGMathTest_LDADD = libsgmath.a $(base_LIBS)
-+SGMathTest_LDADD = libsgmath.la $(base_LIBS) -lz 
- 
--
--lib_LIBRARIES = libsgmath.a
-+lib_LTLIBRARIES = libsgmath.la 
+-lib_LIBRARIES = libsgxml.a
++lib_LTLIBRARIES = libsgxml.la
  
  include_HEADERS = \
- 	interpolater.hxx \
-@@ -35,7 +35,7 @@
+ 	easyxml.hxx
+@@ -8,7 +8,7 @@
+ noinst_HEADERS = \
+ 	xmltok_impl.c xmltok_ns.c
  
- EXTRA_DIST = linintp2.h linintp2.inl sphrintp.h sphrintp.inl
- 
--libsgmath_a_SOURCES = \
-+libsgmath_la_SOURCES = \
- 	interpolater.cxx \
- 	leastsqs.cxx \
- 	polar3d.cxx \
---- SimGear-0.3.10.clean_build/simgear/serial/Makefile.am.orig	2006-08-16 15:26:43.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/serial/Makefile.am	2006-08-16 15:14:52.000000000 -0700
-@@ -1,17 +1,17 @@
- includedir = @includedir@/serial
- 
--lib_LIBRARIES = libsgserial.a
-+lib_LTLIBRARIES = libsgserial.la
- 
- include_HEADERS = serial.hxx
- 
--libsgserial_a_SOURCES = serial.cxx
-+libsgserial_la_SOURCES = serial.cxx
- 
- noinst_PROGRAMS = testserial
- 
- testserial_SOURCES = testserial.cxx
- 
- testserial_LDADD = \
--	$(top_builddir)/simgear/serial/libsgserial.a \
--	$(top_builddir)/simgear/debug/libsgdebug.a
-+	$(top_builddir)/simgear/serial/libsgserial.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la
- 
- INCLUDES = -I$(top_srcdir)
---- SimGear-0.3.10.clean_build/simgear/Makefile.am.orig	2006-08-16 15:21:09.000000000 -0700
-+++ SimGear-0.3.10.clean_build/simgear/Makefile.am	2006-08-16 15:14:49.000000000 -0700
-@@ -16,20 +16,20 @@
- 	$(compatibility_DIR) \
- 	xml \
- 	debug \
--	misc \
- 	structure \
-+	props \
-+	misc \
- 	bucket \
- 	ephemeris \
-+	serial \
- 	io \
- 	magvar \
- 	math \
- 	$(METAR_DIRS) \
- 	nasal \
--	props \
- 	route \
- 	scene \
- 	screen \
--	serial \
- 	sound \
- 	$(SGTHREAD_DIR) \
- 	timing
---- SimGear-0.3.10.clean_build/configure.ac.orig	2006-08-16 15:19:32.000000000 -0700
-+++ SimGear-0.3.10.clean_build/configure.ac	2006-08-16 15:14:48.000000000 -0700
-@@ -32,7 +32,7 @@
- AC_PROG_CC
- AC_PROG_CPP
- AC_PROG_CXX
--AC_PROG_RANLIB
-+AC_PROG_LIBTOOL
- AC_PROG_INSTALL
- AC_PROG_LN_S
- 
---- SimGear-0.3.10/simgear/props/Makefile.am.orig	2006-08-16 16:03:23.000000000 -0700
-+++ SimGear-0.3.10/simgear/props/Makefile.am	2006-08-16 16:09:13.000000000 -0700
-@@ -12,15 +12,19 @@
- 	props.cxx \
- 	props_io.cxx
- 
--noinst_PROGRAMS = props_test
- 
--props_test_SOURCES = props_test.cxx
--props_test_LDADD = \
--	$(top_builddir)/simgear/props/libsgprops.la \
--	$(top_builddir)/simgear/xml/libsgxml.la \
--	$(top_builddir)/simgear/misc/libsgmisc.la \
--	$(top_builddir)/simgear/debug/libsgdebug.la \
--	$(top_builddir)/simgear/structure/libsgstructure.la \
--	-lz
-+# NOTE: Looped dependencies misc and props test files, commenting this one out
-+# noinst_PROGRAMS = props_test
-+
-+
-+# props_test_SOURCES = props_test.cxx
-+# props_test_LDADD = \
-+#	$(top_builddir)/simgear/props/libsgprops.la \
-+#	$(top_builddir)/simgear/xml/libsgxml.la \
-+#	$(top_builddir)/simgear/debug/libsgdebug.la \
-+#	$(top_builddir)/simgear/structure/libsgstructure.la \
-+# 	$(top_builddir)/simgear/misc/libsgmisc.la \
-+#	-lz
-+
- 
- INCLUDES = -I$(top_srcdir)
---- SimGear-0.3.10/simgear/math/Makefile.am.orig	2006-08-16 16:20:04.000000000 -0700
-+++ SimGear-0.3.10/simgear/math/Makefile.am	2006-08-16 16:27:17.000000000 -0700
-@@ -5,8 +5,14 @@
- TESTS           = $(check_PROGRAMS)
- 
- SGMathTest_SOURCES = SGMathTest.cxx
--# SGMathTest_LDADD = libsgmath.a $(base_LIBS)
--SGMathTest_LDADD = libsgmath.la $(base_LIBS) -lz 
-+
-+SGMathTest_LDADD = libsgmath.la \
-+        $(top_builddir)/simgear/misc/libsgmisc.la \
-+        $(top_builddir)/simgear/structure/libsgstructure.la \
-+        $(top_builddir)/simgear/props/libsgprops.la \
-+        $(top_builddir)/simgear/debug/libsgdebug.la \
-+        $(top_builddir)/simgear/xml/libsgxml.la \
-+	$(base_LIBS) -lz 
- 
- lib_LTLIBRARIES = libsgmath.la 
- 
---- SimGear-0.3.10/simgear/scene/model/Makefile.am.orig	2006-08-16 15:54:15.000000000 -0700
-+++ SimGear-0.3.10/simgear/scene/model/Makefile.am	2006-08-16 16:18:45.000000000 -0700
-@@ -1,6 +1,6 @@
- includedir = @includedir@/scene/model
- 
--lib_LIBRARIES = libsgmodel.a
-+lib_LTLIBRARIES = libsgmodel.la
- 
- noinst_HEADERS =
- 
-@@ -15,7 +15,7 @@
- 	placementtrans.hxx \
- 	shadowvolume.hxx
- 
--libsgmodel_a_SOURCES = \
-+libsgmodel_la_SOURCES = \
- 	animation.cxx \
- 	custtrans.cxx \
- 	location.cxx \
---- SimGear-0.3.10/simgear/scene/material/Makefile.am.orig	2006-08-16 15:54:15.000000000 -0700
-+++ SimGear-0.3.10/simgear/scene/material/Makefile.am	2006-08-16 16:13:10.000000000 -0700
-@@ -1,6 +1,6 @@
- includedir = @includedir@/scene/material
- 
--lib_LIBRARIES = libsgmaterial.a
-+lib_LTLIBRARIES = libsgmaterial.la
- 
- noinst_HEADERS =
- 
-@@ -9,7 +9,7 @@
- 	matlib.hxx \
- 	matmodel.hxx
- 
--libsgmaterial_a_SOURCES = \
-+libsgmaterial_la_SOURCES = \
- 	mat.cxx \
- 	matlib.cxx \
- 	matmodel.cxx
---- SimGear-0.3.10/simgear/scene/tgdb/Makefile.am.orig	2006-08-16 15:54:15.000000000 -0700
-+++ SimGear-0.3.10/simgear/scene/tgdb/Makefile.am	2006-08-16 16:27:40.000000000 -0700
-@@ -1,6 +1,6 @@
- includedir = @includedir@/scene/tgdb
- 
--lib_LIBRARIES = libsgtgdb.a
-+lib_LTLIBRARIES = libsgtgdb.la
- 
- noinst_HEADERS =
- 
-@@ -12,7 +12,7 @@
- 	userdata.hxx \
- 	vasi.hxx
- 
--libsgtgdb_a_SOURCES = \
-+libsgtgdb_la_SOURCES = \
- 	apt_signs.cxx \
- 	leaf.cxx \
- 	obj.cxx \
---- SimGear-0.3.10/simgear/scene/sky/Makefile.am.orig	2006-08-16 15:54:15.000000000 -0700
-+++ SimGear-0.3.10/simgear/scene/sky/Makefile.am	2006-08-16 16:23:01.000000000 -0700
-@@ -1,6 +1,6 @@
- includedir = @includedir@/scene/sky
- 
--lib_LIBRARIES = libsgsky.a
-+lib_LTLIBRARIES = libsgsky.la
- 
- include_HEADERS = \
- 	cloud.hxx \
-@@ -14,7 +14,7 @@
- 	cloudfield.hxx \
- 	newcloud.hxx
- 
--libsgsky_a_SOURCES = \
-+libsgsky_la_SOURCES = \
- 	cloud.cxx \
- 	dome.cxx \
- 	moon.cxx \
+-libsgxml_a_SOURCES = \
++libsgxml_la_SOURCES = \
+ 	asciitab.h \
+ 	easyxml.cxx \
+ 	hashtable.h hashtable.c \
