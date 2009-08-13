@@ -198,29 +198,33 @@ diff -uNr SimGear-1.9.1.orig/simgear/Makefile.am SimGear-1.9.1/simgear/Makefile.
 +++ SimGear-1.9.1/simgear/Makefile.am	2009-08-11 14:33:26.000000000 +0200
 @@ -16,22 +16,22 @@
  	$(compatibility_DIR) \
- 	xml \
+-	xml \
  	debug \
++	serial \
++	nasal \
 -	misc \
-+	timing \ 
++	timing \
  	structure \
++	xml \
 +	props \
 +	misc \
  	bucket \
  	ephemeris \
-+	serial \
  	io \
  	magvar \
  	math \
- 	$(METAR_DIRS) \
- 	nasal \
+-	$(METAR_DIRS) \
+-	nasal \
 -	props \
  	route \
- 	scene \
+-	scene \
  	screen \
 -	serial \
  	sound \
 -	$(SGTHREAD_DIR) \
 -	timing
++	scene \
++	$(METAR_DIRS) \
 +	$(SGTHREAD_DIR)
  
  DIST_SUBDIRS = $(SUBDIRS) compatibility
