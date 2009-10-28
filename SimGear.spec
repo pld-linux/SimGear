@@ -1,6 +1,7 @@
 #
 # TODO: - Add missing BRs for xorg
 #	- Consider getting back to static linking or set sonames for shared libraries
+#	- Still some undefined references (ldd -r /usr/lib/libsgprops.so after install is good example)
 #
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
