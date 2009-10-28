@@ -102,14 +102,13 @@ diff -uNr SimGear-1.9.1.orig/simgear/nasal/Makefile.am SimGear-1.9.1/simgear/nas
 diff -uNr SimGear-1.9.1.orig/simgear/props/Makefile.am SimGear-1.9.1/simgear/props/Makefile.am
 --- SimGear-1.9.1.orig/simgear/props/Makefile.am	2009-08-12 15:08:50.000000000 +0200
 +++ SimGear-1.9.1/simgear/props/Makefile.am	2009-08-12 09:40:02.000000000 +0200
-@@ -12,6 +12,10 @@
+@@ -12,6 +12,9 @@
  	props.cxx \
  	props_io.cxx
  
 +libsgprops_la_LIBADD = \
 +	$(top_builddir)/simgear/xml/libsgxml.la \
-+	$(top_builddir)/simgear/debug/libsgdebug.la \
-+	$(top_builddir)/simgear/timing/libsgtiming.la
++	$(top_builddir)/simgear/debug/libsgdebug.la
  
  # NOTE: Looped dependencies misc and props test files, commenting this one out
  # noinst_PROGRAMS = props_test
