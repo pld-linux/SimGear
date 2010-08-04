@@ -16,7 +16,7 @@ Patch0:		%{name}-shared.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-cstdio.patch
 Patch3:		%{name}-tgdb.patch
-URL:		http://www.simgear.org/
+URL:		http://simgear.sourceforge.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
