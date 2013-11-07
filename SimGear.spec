@@ -5,11 +5,12 @@ Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
 Version:	2.12.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	ftp://mirrors.ibiblio.org/pub/mirrors/simgear/ftp/Source/simgear-%{version}.tar.bz2
 # Source0-md5:	dfc752f4759a2f795b7cdc9dad28411e
+Patch0:		%{name}-build.patch
 URL:		http://simgear.sourceforge.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -70,6 +71,7 @@ Statyczne biblioteki SimGear.
 
 %prep
 %setup -q -n simgear-%{version}
+%patch0 -p1
 
 %build
 install -d build
