@@ -100,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%dir %{_datadir}/SimGearCore
+%{_datadir}/SimGearCore/SimGearCoreConfig.cmake
+%{_datadir}/SimGearCore/SimGearCoreConfig-pld.cmake
 %attr(755,root,root) %{_libdir}/libSimGearCore.so
 %attr(755,root,root) %{_libdir}/libSimGearScene.so
 %{_includedir}/simgear
