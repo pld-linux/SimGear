@@ -1,0 +1,485 @@
+commit 791273c61de23d2ec383a270db27015d235a9938
+Author: Thomas Geymayer <tomgey@gmail.com>
+Date:   Sat Aug 9 17:18:21 2014 +0200
+
+    Update for OpenSceneGraph 3.3.2 API changes.
+
+diff --git a/simgear/canvas/ODGauge.cxx b/simgear/canvas/ODGauge.cxx
+index 5c547ea..4a2b7fa 100644
+--- a/simgear/canvas/ODGauge.cxx
++++ b/simgear/canvas/ODGauge.cxx
+@@ -44,6 +44,7 @@
+ #include <osg/ShadeModel>
+ #include <osg/StateSet>
+ #include <osg/FrameBufferObject> // for GL_DEPTH_STENCIL_EXT on Windows
++#include <osg/Version>
+ #include <osgUtil/RenderBin>
+ 
+ #include <cassert>
+@@ -266,7 +267,15 @@ namespace canvas
+   //----------------------------------------------------------------------------
+   void ODGauge::reinit()
+   {
+-    osg::NodeCallback* cull_callback = camera ? camera->getCullCallback() : 0;
++    osg::NodeCallback* cull_callback =
++      camera
++#if OSG_VERSION_LESS_THAN(3,3,2)
++      ? camera->getCullCallback()
++#else
++      ? dynamic_cast<osg::NodeCallback*>(camera->getCullCallback())
++#endif
++      : 0;
++
+     clear();
+     allocRT(cull_callback);
+   }
+diff --git a/simgear/canvas/elements/CanvasElement.cxx b/simgear/canvas/elements/CanvasElement.cxx
+index 478cfb8..f895292 100644
+--- a/simgear/canvas/elements/CanvasElement.cxx
++++ b/simgear/canvas/elements/CanvasElement.cxx
+@@ -27,6 +27,7 @@
+ #include <osg/Drawable>
+ #include <osg/Geode>
+ #include <osg/Scissor>
++#include <osg/Version>
+ 
+ #include <boost/algorithm/string/predicate.hpp>
+ #include <boost/foreach.hpp>
+@@ -649,7 +650,11 @@ namespace canvas
+   osg::BoundingBox Element::getBoundingBox() const
+   {
+     if( _drawable )
++#if OSG_VERSION_LESS_THAN(3,3,2)
+       return _drawable->getBound();
++#else
++      return _drawable->getBoundingBox();
++#endif
+ 
+     osg::BoundingBox bb;
+ 
+@@ -672,7 +677,13 @@ namespace canvas
+       return osg::BoundingBox();
+ 
+     osg::BoundingBox transformed;
+-    const osg::BoundingBox& bb = _drawable->getBound();
++    const osg::BoundingBox& bb =
++#if OSG_VERSION_LESS_THAN(3,3,2)
++      _drawable->getBound();
++#else
++      _drawable->getBoundingBox();
++#endif
++
+     for(int i = 0; i < 4; ++i)
+       transformed.expandBy( bb.corner(i) * m );
+ 
+diff --git a/simgear/canvas/elements/CanvasImage.cxx b/simgear/canvas/elements/CanvasImage.cxx
+index 4f4ffc7..c89c71a 100644
+--- a/simgear/canvas/elements/CanvasImage.cxx
++++ b/simgear/canvas/elements/CanvasImage.cxx
+@@ -413,7 +413,14 @@ namespace canvas
+         && child->getNameString() == "visible"
+         && child->getBoolValue() )
+     {
+-      CullCallback* cb = static_cast<CullCallback*>(_geom->getCullCallback());
++      CullCallback* cb =
++#if OSG_VERSION_LESS_THAN(3,3,2)
++        static_cast<CullCallback*>
++#else
++        dynamic_cast<CullCallback*>
++#endif
++        ( _geom->getCullCallback() );
++
+       if( cb )
+         cb->cullNextFrame();
+     }
+diff --git a/simgear/canvas/elements/CanvasPath.cxx b/simgear/canvas/elements/CanvasPath.cxx
+index ba5351f..9eddcb3 100644
+--- a/simgear/canvas/elements/CanvasPath.cxx
++++ b/simgear/canvas/elements/CanvasPath.cxx
+@@ -20,6 +20,7 @@
+ #include <simgear/scene/util/parse_color.hxx>
+ 
+ #include <osg/Drawable>
++#include <osg/Version>
+ 
+ #include <vg/openvg.h>
+ #include <cassert>
+@@ -372,7 +373,13 @@ namespace canvas
+       /**
+        * Compute the bounding box
+        */
+-      virtual osg::BoundingBox computeBound() const
++      virtual osg::BoundingBox
++#if OSG_VERSION_LESS_THAN(3,3,2)
++      computeBound()
++#else
++      computeBoundingBox()
++#endif
++      const
+       {
+         if( _path == VG_INVALID_HANDLE || (_attributes_dirty & PATH) )
+           return osg::BoundingBox();
+diff --git a/simgear/canvas/elements/CanvasText.cxx b/simgear/canvas/elements/CanvasText.cxx
+index ebe76d4..239383c 100644
+--- a/simgear/canvas/elements/CanvasText.cxx
++++ b/simgear/canvas/elements/CanvasText.cxx
+@@ -45,7 +45,13 @@ namespace canvas
+       SGVec2i sizeForWidth(int w) const;
+       osg::Vec2 handleHit(const osg::Vec2f& pos);
+ 
+-      virtual osg::BoundingBox computeBound() const;
++      virtual osg::BoundingBox
++#if OSG_VERSION_LESS_THAN(3,3,2)
++      computeBound()
++#else
++      computeBoundingBox()
++#endif
++      const;
+ 
+     protected:
+ 
+@@ -467,9 +473,20 @@ namespace canvas
+   }
+ 
+   //----------------------------------------------------------------------------
+-  osg::BoundingBox Text::TextOSG::computeBound() const
++  osg::BoundingBox
++#if OSG_VERSION_LESS_THAN(3,3,2)
++  Text::TextOSG::computeBound()
++#else
++  Text::TextOSG::computeBoundingBox()
++#endif
++  const
+   {
+-    osg::BoundingBox bb = osgText::Text::computeBound();
++    osg::BoundingBox bb =
++#if OSG_VERSION_LESS_THAN(3,3,2)
++      osgText::Text::computeBound();
++#else
++      osgText::Text::computeBoundingBox();
++#endif
+ 
+ #if OSG_VERSION_LESS_THAN(3,1,0)
+     if( bb.valid() )
+diff --git a/simgear/scene/material/EffectGeode.hxx b/simgear/scene/material/EffectGeode.hxx
+index 515b1a0..34b87e3 100644
+--- a/simgear/scene/material/EffectGeode.hxx
++++ b/simgear/scene/material/EffectGeode.hxx
+@@ -18,6 +18,9 @@
+ #define SIMGEAR_EFFECT_GEODE_HXX 1
+ 
+ #include <osg/Geode>
++#include <osg/Version>
++
++#include <boost/iterator/iterator_adaptor.hpp>
+ 
+ #include "Effect.hxx"
+ 
+@@ -25,7 +28,41 @@ namespace simgear
+ {
+ class EffectGeode : public osg::Geode
+ {
+-public:
++  public:
++
++#if OSG_VERSION_LESS_THAN(3,3,2)
++    typedef DrawableList::iterator DrawablesIterator;
++#else
++    class DrawablesIterator:
++      public boost::iterator_adaptor<
++        DrawablesIterator,
++        osg::NodeList::iterator,
++        osg::ref_ptr<osg::Drawable>,
++        boost::use_default,
++        osg::ref_ptr<osg::Drawable> // No reference as Reference type.
++                                    // The child list does not contain Drawable
++                                    // ref_ptr so we can not return any
++                                    // references to them.
++      >
++    {
++      public:
++
++        DrawablesIterator()
++        {}
++
++        explicit DrawablesIterator(osg::NodeList::iterator const& node_it):
++          DrawablesIterator::iterator_adaptor_(node_it)
++        {}
++
++      private:
++        friend class boost::iterator_core_access;
++        osg::ref_ptr<osg::Drawable> dereference() const
++        {
++          return base_reference()->get()->asDrawable();
++        }
++    };
++#endif
++
+     EffectGeode();
+     EffectGeode(const EffectGeode& rhs,
+                 const osg::CopyOp& copyop = osg::CopyOp::SHALLOW_COPY);
+@@ -34,9 +71,15 @@ public:
+     void setEffect(Effect* effect);
+     virtual void resizeGLObjectBuffers(unsigned int maxSize);
+     virtual void releaseGLObjects(osg::State* = 0) const;
+-    typedef DrawableList::iterator DrawablesIterator;
++
++#if OSG_VERSION_LESS_THAN(3,3,2)
+     DrawablesIterator drawablesBegin() { return _drawables.begin(); }
+     DrawablesIterator drawablesEnd() { return _drawables.end(); }
++#else
++    DrawablesIterator drawablesBegin() { return DrawablesIterator(_children.begin()); }
++    DrawablesIterator drawablesEnd() { return DrawablesIterator(_children.end()); }
++#endif
++
+     void runGenerators(osg::Geometry *geometry);
+ private:
+     osg::ref_ptr<Effect> _effect;
+diff --git a/simgear/scene/material/Technique.cxx b/simgear/scene/material/Technique.cxx
+index d5d9b06..93a17b8 100644
+--- a/simgear/scene/material/Technique.cxx
++++ b/simgear/scene/material/Technique.cxx
+@@ -140,27 +140,40 @@ Technique::processDrawables(const EffectGeode::DrawablesIterator& begin,
+     EffectGeode::DrawablesIterator itr = begin;
+     bool computeNearFar
+         = cv->getComputeNearFarMode() != CullVisitor::DO_NOT_COMPUTE_NEAR_FAR;
+-    for (int i = 0; i < NUM_DRAWABLES && itr != end; ++itr, ++i) {
+-        Drawable* drawable = itr->get();
+-        const BoundingBox& bb = drawable->getBound();
+-        if ((drawable->getCullCallback()
+-             && drawable->getCullCallback()->cull(cv, drawable,
+-                                                  &cv->getRenderInfo()))
+-            || (isCullingActive && cv->isCulled(bb))) {
+-            depth[i] = FLT_MAX;
+-            continue;
+-        }
+-        if (computeNearFar && bb.valid()) {
+-            if (!cv->updateCalculatedNearFar(matrix, *drawable, false)) {
+-                depth[i] = FLT_MAX;
+-                continue;
+-            }
++    for (int i = 0; i < NUM_DRAWABLES && itr != end; ++itr, ++i)
++    {
++      Drawable* drawable = itr->get();
++
++#if OSG_VERSION_LESS_THAN(3,3,2)
++      const BoundingBox& bb = drawable->getBound();
++      osg::Drawable::CullCallback* cull = drawable->getCullCallback();
++#else
++      const BoundingBox& bb = drawable->getBoundingBox();
++      osg::Drawable::CullCallback* cull =
++        dynamic_cast<osg::Drawable::CullCallback*>(drawable->getCullCallback());
++#endif
++
++      if(   (cull && cull->cull(cv, drawable, &cv->getRenderInfo()))
++         || (isCullingActive && cv->isCulled(bb)) )
++      {
++        depth[i] = FLT_MAX;
++        continue;
++      }
++
++      if( computeNearFar && bb.valid() )
++      {
++        if( !cv->updateCalculatedNearFar(matrix, *drawable, false) )
++        {
++          depth[i] = FLT_MAX;
++          continue;
+         }
+-        depth[i] = (bb.valid()
+-                    ? cv->getDistanceFromEyePoint(bb.center(), false)
+-                    : 0.0f);
+-        if (isNaN(depth[i]))
+-            depth[i] = FLT_MAX;
++      }
++
++      depth[i] = bb.valid()
++               ? cv->getDistanceFromEyePoint(bb.center(), false)
++               : 0.0f;
++      if( isNaN(depth[i]) )
++        depth[i] = FLT_MAX;
+     }
+     EffectCullVisitor* ecv = dynamic_cast<EffectCullVisitor*>( cv );
+     EffectGeode::DrawablesIterator drawablesEnd = itr;
+diff --git a/simgear/scene/sky/CloudShaderGeometry.hxx b/simgear/scene/sky/CloudShaderGeometry.hxx
+index 20d0db8..6d78af2 100644
+--- a/simgear/scene/sky/CloudShaderGeometry.hxx
++++ b/simgear/scene/sky/CloudShaderGeometry.hxx
+@@ -95,7 +95,13 @@ class CloudShaderGeometry : public osg::Drawable
+         { return _cloudsprites[i]; }
+         
+         virtual void drawImplementation(osg::RenderInfo& renderInfo) const;
+-        virtual osg::BoundingBox computeBound() const
++        virtual osg::BoundingBox
++#if OSG_VERSION_LESS_THAN(3,3,2)
++        computeBound()
++#else
++        computeBoundingBox()
++#endif
++        const
+         {
+             return _bbox;
+         }
+diff --git a/simgear/scene/tgdb/SGVasiDrawable.cxx b/simgear/scene/tgdb/SGVasiDrawable.cxx
+index bb3ce0e..d66474f 100644
+--- a/simgear/scene/tgdb/SGVasiDrawable.cxx
++++ b/simgear/scene/tgdb/SGVasiDrawable.cxx
+@@ -104,7 +104,12 @@ SGVasiDrawable::drawImplementation(osg::RenderInfo& renderInfo) const
+ }
+ 
+ osg::BoundingBox
+-SGVasiDrawable::computeBound() const
++#if OSG_VERSION_LESS_THAN(3,3,2)
++SGVasiDrawable::computeBound()
++#else
++SGVasiDrawable::computeBoundingBox()
++#endif
++const
+ {
+   osg::BoundingBox bb;
+   for (unsigned i = 0; i < _lights.size(); ++i)
+diff --git a/simgear/scene/tgdb/SGVasiDrawable.hxx b/simgear/scene/tgdb/SGVasiDrawable.hxx
+index 242e393..e4b0479 100644
+--- a/simgear/scene/tgdb/SGVasiDrawable.hxx
++++ b/simgear/scene/tgdb/SGVasiDrawable.hxx
+@@ -23,9 +23,10 @@
+ #define _SG_VASI_DRAWABLE_HXX
+ 
+ #include <simgear/compiler.h>
++#include <simgear/math/SGMath.hxx>
+ 
+ #include <osg/Drawable>
+-#include <simgear/math/SGMath.hxx>
++#include <osg/Version>
+ 
+ class SGVasiDrawable : public osg::Drawable {
+   struct LightData;
+@@ -49,7 +50,13 @@ public:
+                 const SGVec3f& up);
+ 
+   virtual void drawImplementation(osg::RenderInfo& renderInfo) const;
+-  virtual osg::BoundingBox computeBound() const;
++  virtual osg::BoundingBox
++#if OSG_VERSION_LESS_THAN(3,3,2)
++  computeBound()
++#else
++  computeBoundingBox()
++#endif
++  const;
+ 
+ private:
+   SGVec4f getColor(float angleDeg) const;
+diff --git a/simgear/scene/tgdb/ShaderGeometry.cxx b/simgear/scene/tgdb/ShaderGeometry.cxx
+index 36a3093..5d286c3 100644
+--- a/simgear/scene/tgdb/ShaderGeometry.cxx
++++ b/simgear/scene/tgdb/ShaderGeometry.cxx
+@@ -60,9 +60,21 @@ void ShaderGeometry::drawImplementation(osg::RenderInfo& renderInfo) const
+     }
+ }
+ 
+-BoundingBox ShaderGeometry::computeBound() const
++BoundingBox
++#if OSG_VERSION_LESS_THAN(3,3,2)
++ShaderGeometry::computeBound()
++#else
++ShaderGeometry::computeBoundingBox()
++#endif
++const
+ {
+-    const BoundingBox& geom_box = _geometry->getBound();
++    const BoundingBox& geom_box =
++#if OSG_VERSION_LESS_THAN(3,3,2)
++      _geometry->getBound();
++#else
++      _geometry->getBoundingBox();
++#endif
++
+     BoundingBox bb;
+     const Vec4Array* posScales = _posScaleArray.get();
+     if (!posScales)
+diff --git a/simgear/scene/tgdb/ShaderGeometry.hxx b/simgear/scene/tgdb/ShaderGeometry.hxx
+index 30c72fb..a5de095 100644
+--- a/simgear/scene/tgdb/ShaderGeometry.hxx
++++ b/simgear/scene/tgdb/ShaderGeometry.hxx
+@@ -58,8 +58,15 @@ class ShaderGeometry : public osg::Drawable
+         META_Object(flightgear, ShaderGeometry);
+ 
+         virtual void drawImplementation(osg::RenderInfo& renderInfo) const;
+-        virtual osg::BoundingBox computeBound() const;
+         
++        virtual osg::BoundingBox
++#if OSG_VERSION_LESS_THAN(3,3,2)
++        computeBound()
++#else
++        computeBoundingBox()
++#endif
++        const;
++
+         void setGeometry(osg::Geometry* geometry)
+         {
+             _geometry = geometry;
+diff --git a/simgear/scene/util/SGEnlargeBoundingBox.cxx b/simgear/scene/util/SGEnlargeBoundingBox.cxx
+index 8e5d8f3..5ff1985 100644
+--- a/simgear/scene/util/SGEnlargeBoundingBox.cxx
++++ b/simgear/scene/util/SGEnlargeBoundingBox.cxx
+@@ -24,7 +24,9 @@
+ #endif
+ 
+ #include "SGEnlargeBoundingBox.hxx"
++
+ #include <osg/Drawable>
++#include <osg/Version>
+ 
+ SGEnlargeBoundingBox::SGEnlargeBoundingBox(float offset) :
+   _offset(offset)
+@@ -41,7 +43,13 @@ SGEnlargeBoundingBox::SGEnlargeBoundingBox(const SGEnlargeBoundingBox& cb,
+ osg::BoundingBox
+ SGEnlargeBoundingBox::computeBound(const osg::Drawable& drawable) const
+ {
+-  osg::BoundingBox bound = drawable.computeBound();
++  osg::BoundingBox bound =
++#if OSG_VERSION_LESS_THAN(3,3,2)
++    drawable.computeBound();
++#else
++    drawable.computeBoundingBox();
++#endif
++
+   if (!bound.valid())
+     return bound;
+   return osg::BoundingBox(bound._min - osg::Vec3(_offset, _offset, _offset),
+diff --git a/simgear/scene/util/UpdateOnceCallback.cxx b/simgear/scene/util/UpdateOnceCallback.cxx
+index 2615df4..99d0192 100644
+--- a/simgear/scene/util/UpdateOnceCallback.cxx
++++ b/simgear/scene/util/UpdateOnceCallback.cxx
+@@ -20,6 +20,7 @@
+ #include "UpdateOnceCallback.hxx"
+ 
+ #include <osg/Node>
++#include <osg/NodeVisitor>
+ 
+ namespace simgear
+ {
+commit 68d0891665683cbe115c0689a9f17f4aa078cf56
+Author: Thomas Geymayer <tomgey@gmail.com>
+Date:   Sun Aug 10 15:36:27 2014 +0200
+
+    Canvas: fix element mouse hit detection with OSG 3.3.2.
+
+diff --git a/simgear/canvas/elements/CanvasElement.cxx b/simgear/canvas/elements/CanvasElement.cxx
+index f895292..6d8c930 100644
+--- a/simgear/canvas/elements/CanvasElement.cxx
++++ b/simgear/canvas/elements/CanvasElement.cxx
+@@ -398,7 +398,13 @@ namespace canvas
+ 
+     // Drawables have a bounding box...
+     if( _drawable )
+-      return _drawable->getBound().contains(osg::Vec3f(local_pos, 0));
++      return _drawable->
++#if OSG_VERSION_LESS_THAN(3,3,2)
++      getBound()
++#else
++      getBoundingBox()
++#endif
++      .contains(osg::Vec3f(local_pos, 0));
+     else if( _transform.valid() )
+       // ... for other elements, i.e. groups only a bounding sphere is available
+       return _transform->getBound().contains(osg::Vec3f(parent_pos, 0));

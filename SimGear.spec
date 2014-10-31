@@ -10,11 +10,13 @@ License:	GPL v2+
 Group:		Libraries
 Source0:	ftp://mirrors.ibiblio.org/pub/mirrors/simgear/ftp/Source/simgear-%{version}.tar.bz2
 # Source0-md5:	d6aac26bf8876391a7d5f4381fc98c01
+Patch0:		OpenSceneGraph-3.3.2.patch
 URL:		http://simgear.sourceforge.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
 BuildRequires:	OpenSceneGraph-devel >=3.0.0
+BuildRequires:	boost-devel
 BuildRequires:	cmake
 BuildRequires:	freealut-devel
 BuildRequires:	libjpeg-devel
@@ -70,6 +72,7 @@ Statyczne biblioteki SimGear.
 
 %prep
 %setup -q -n simgear-%{version}
+%patch0 -p1
 
 %build
 install -d build
