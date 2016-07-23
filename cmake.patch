@@ -1,0 +1,11 @@
+--- simgear-2016.2.1/CMakeLists.txt.orig	2016-05-17 10:36:36.000000000 +0200
++++ simgear-2016.2.1/CMakeLists.txt	2016-07-22 11:33:05.508936087 +0200
+@@ -449,7 +449,7 @@
+   @ONLY
+ )
+ 
+-set(ConfigPackageLocation lib/cmake/SimGear)
++set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/SimGear)
+ install(EXPORT SimGearTargets
+   DESTINATION ${ConfigPackageLocation}
+ )

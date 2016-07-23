@@ -4,18 +4,18 @@
 Summary:	A set of libraries to build 3d simulations, games etc
 Summary(pl.UTF-8):	Zestaw bibliotek do budowania trójwymiarowych symulacji, gier itp
 Name:		SimGear
-Version:	3.2.0
+Version:	2016.2.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	ftp://mirrors.ibiblio.org/pub/mirrors/simgear/ftp/Source/simgear-%{version}.tar.bz2
-# Source0-md5:	d6aac26bf8876391a7d5f4381fc98c01
-Patch0:		OpenSceneGraph-3.3.2.patch
-URL:		http://simgear.sourceforge.net/
+Source0:	https://downloads.sourceforge.net/project/flightgear/release-2016.2/simgear-%{version}.tar.bz2
+# Source0-md5:	7bd21e63ffb83109f530627c593d94cd
+Patch0:		cmake.patch
+URL:		http://wiki.flightgear.org/SimGear
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
-BuildRequires:	OpenSceneGraph-devel >=3.0.0
+BuildRequires:	OpenSceneGraph-devel >= 3.2.0
 BuildRequires:	boost-devel
 BuildRequires:	cmake
 BuildRequires:	freealut-devel
@@ -27,6 +27,7 @@ Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
+%define		filterout	-flto
 
 %description
 SimGear is a set of open-source libraries designed to be used as
@@ -100,9 +101,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%dir %{_datadir}/SimGearCore
-%{_datadir}/SimGearCore/SimGearCoreConfig.cmake
-%{_datadir}/SimGearCore/SimGearCoreConfig-pld.cmake
+%dir %{_libdir}/cmake/SimGear
+%{_libdir}/cmake/SimGear/SimGearConfig.cmake
+%{_libdir}/cmake/SimGear/SimGearConfigVersion.cmake
+%{_libdir}/cmake/SimGear/SimGearTargets-pld.cmake
+%{_libdir}/cmake/SimGear/SimGearTargets.cmake
 %attr(755,root,root) %{_libdir}/libSimGearCore.so
 %attr(755,root,root) %{_libdir}/libSimGearScene.so
 %{_includedir}/simgear
