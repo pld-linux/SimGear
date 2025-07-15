@@ -73,7 +73,7 @@ Statyczne biblioteki SimGear.
 
 %prep
 %setup -q -n simgear-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 install -d build
